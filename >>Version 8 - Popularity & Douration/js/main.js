@@ -18,23 +18,18 @@ $(function () {
 	prepareData();
 	drawMap();
 
-	//funktion die mein mouse scrolling ausgibt
-	// $(document).on("wheel", function (event) {
-	// 	mouseWheel = event.originalEvent.deltaY * 1000;
-	// 	console.log(mouseWheel);
-	// });
+	//text anzeigen
 
-	//console.log die Tastaturoutputs in der Console
-	// $(document).keydown(function (event) {
-	// 	console.log(event.which);
-	// });
-	$(document).on("wheel", function (event) {
-		mouseWheel = event.originalEvent.deltaY;
-		//console.log(mouseWheel);
-		//empfindlichkeit von mouseWheel veringern
-		selectedYear = selectedYear + mouseWheel;
+	renderer.append(
+		"<div><h1>Um zu sehen, ob längere Songs tendenziell beliebter sind oder ob es einen Zusammenhang zwischen der Länge eines Songs und seiner Beliebtheit gibt.</h1></div>"
+	);
 
-		//renderer löschen und neu zeichnen
+	//funktion die meine Keyboardeingabe in colsole ausgibt
+	$(document).keydown(function (event) {
+		//console.log(event.which);
+		keyInput = event.which / 40;
+		console.log(keyInput);
+		selectedYear = selectedYear + keyInput;
 		renderer.empty();
 		drawMap();
 		console.log(selectedYear);
@@ -60,7 +55,7 @@ function drawMap() {
 		//summe von Dancebility und Energy
 		let danceAndeEnergy = song.danceability + song.energy;
 		//Mappgen von danceAndeEnergy auf den Screen
-		const x = gmynd.map(danceAndeEnergy, 0, 2, 0, stageWidth);
+		const x = gmynd.map(song.popularity, 0, 100, 0, stageWidth);
 
 		//const x = gmynd.map(song.speechiness, 0, 0.5, 0, stageWidth);
 
@@ -73,14 +68,18 @@ function drawMap() {
 		//vfunction die den mousscrolling ausgibt
 
 		//Mappgen von popularity auf den Screen
-		const y = gmynd.map(song.speechiness, 0, 0.5, 0, stageHeight);
+		const y = gmynd.map(song.duration_ms, 0, 500000, 0, stageHeight);
 
 		let dotColor;
 
 		dotColor = "white";
 
 		if (song.year == selectedYear) {
-			dotColor = "white";
+			if (song.popularity > 70) {
+				dotColor = "red";
+			} else {
+				dotColor = "white";
+			}
 		} else {
 			dotColor = "";
 		}

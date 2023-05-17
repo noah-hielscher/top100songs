@@ -4,6 +4,10 @@ let renderer;
 
 let doSize = 10;
 
+let mouseWheel = 0;
+
+let selectedYear = 2000;
+
 $(function () {
 	renderer = $("#renderer");
 	stageHeight = renderer.innerHeight();
@@ -13,6 +17,17 @@ $(function () {
     Eigenschaften vorzubereiten. */
 	prepareData();
 	drawMap();
+
+	//funktion die meine Keyboardeingabe in colsole ausgibt
+	$(document).keydown(function (event) {
+		//console.log(event.which);
+		keyInput = event.which / 40;
+		console.log(keyInput);
+		selectedYear = selectedYear + keyInput;
+		renderer.empty();
+		drawMap();
+		console.log(selectedYear);
+	});
 });
 
 function prepareData() {}
@@ -20,19 +35,21 @@ function prepareData() {}
 function drawMap() {
 	/* Ausgabe wieviel Länder auf der Map zu sehen sind. */
 	let songCount = songs.length;
-	console.log(songCount + " Lieder im Datensatz");
+	//console.log(songCount + " Lieder im Datensatz");
 
 	/* Land mit der größten Bevölkerungszahl wird ermittelt. */
 	const populationMax = gmynd.dataMax(songs, "population");
 
+	//maouse scrollen in console ausgeben
+
 	/* Iteration durch alle Datensätze, um den Radius (Bevälkerungsdichte) und
     die x- und y-Position für jedes Land zu ermitteln. */
+
 	songs.forEach((song) => {
 		//summe von Dancebility und Energy
-		//let danceAndeEnergy = song.danceability + song.energy;
+		let danceAndeEnergy = song.danceability + song.energy;
 		//Mappgen von danceAndeEnergy auf den Screen
-
-		const x = gmynd.map(song.key, 0, 12, 0, stageWidth);
+		const x = gmynd.map(key, 0, 2, 0, stageWidth);
 
 		//const x = gmynd.map(song.speechiness, 0, 0.5, 0, stageWidth);
 
@@ -40,17 +57,25 @@ function drawMap() {
 		//const x = gmynd.map(song.instrumentalness, 0, 0.2, 0, stageWidth);
 
 		let popularityMax = gmynd.dataMax(songs, "popularity");
-		console.log(popularityMax);
+		//console.log(popularityMax);
+
+		//vfunction die den mousscrolling ausgibt
 
 		//Mappgen von popularity auf den Screen
-		const y = gmynd.map(song.acousticness, 0, 1, 0, stageHeight);
+		const y = gmynd.map(song.speechiness, 0, 0.5, 0, stageHeight);
 
 		let dotColor;
 
-		if (song.popularity > 70) {
-			dotColor = "red";
+		dotColor = "white";
+
+		if (song.year == selectedYear) {
+			if (song.popularity > 70) {
+				dotColor = "red";
+			} else {
+				dotColor = "white";
+			}
 		} else {
-			dotColor = "white";
+			dotColor = "";
 		}
 
 		let dot = $("<div></div>");
@@ -58,8 +83,8 @@ function drawMap() {
 		dot.addClass("dot");
 
 		dot.css({
-			height: 8,
-			width: 8,
+			height: doSize,
+			width: doSize,
 			"background-color": dotColor,
 			position: "absolute",
 			left: x,
