@@ -68,14 +68,19 @@ function drawMap() {
 		//vfunction die den mousscrolling ausgibt
 
 		//Mappgen von popularity auf den Screen
-		const y = gmynd.map(song.energy, 0, 1, 0, stageHeight);
+		const y = gmynd.map(song.energy, 1, 0, 0, stageHeight);
+
+		//speachines umdrehen
+		let speachInstru = 1 - song.speechiness;
+
+		speachInstru = (speachInstru + song.instrumentalness) / 2;
 
 		let dotColor;
 
 		dotColor = "white";
 
 		if (song.year == selectedYear) {
-			if (song.speechiness > 0.33) {
+			if (speachInstru > 0.5) {
 				dotColor = "red";
 			} else {
 				dotColor = "white";
@@ -97,6 +102,7 @@ function drawMap() {
 			top: y,
 			"border-radius": "50%",
 		});
+
 		renderer.append(dot);
 	});
 }
