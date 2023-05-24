@@ -60,11 +60,6 @@ function drawMap() {
     die x- und y-Position für jedes Land zu ermitteln. */
 
 	songs.forEach((song) => {
-		let thisSong = $(this).data("genre");
-		console.log(thisSong);
-	});
-
-	songs.forEach((song) => {
 		//summe von Dancebility und Energy
 		let danceAndeEnergy = song.danceability + song.energy;
 		//Mappgen von danceAndeEnergy auf den Screen

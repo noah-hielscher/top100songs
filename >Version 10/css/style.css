@@ -1,0 +1,42 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background-color: rgb(39, 39, 39);
+	color: white;
+	font-family: "Fira Sans", sans-serif;
+}
+
+#renderer {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(255, 255, 255, 0.05);
+	position: relative;
+}
+
+#toggleViewButton {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 20px;
+	text-align: center;
+	background-color: #777;
+	border-radius: 3%;
+}
+
+.song {
+	background-color: white;
+	position: absolute;
+	border-radius: 100%;
+}
+
+.song.clicked {
+	background-color: rgb(255, 0, 187) !important;
+}
