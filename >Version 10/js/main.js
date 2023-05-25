@@ -50,20 +50,29 @@ function createElements() {
       */
 	let indexSongs = 0;
 
+	let barMax = songs.length;
+	//barMax = newGnere Summer aller Songs
+
+	// console.log(barMax);
+
 	// Hilfsvariable: Map
 	const populationMax = gmynd.dataMax(songs, "popularity");
 
 	//Geht durch die Genres Durch für die Balken
 	for (let genreName in newGnere) {
-		console.log(genreName);
+		// console.log(genreName);
 		/* Iteration durch die Länder des Kontinents */
 
 		let currentGenre = newGnere[genreName];
+		// console.log(currentGenre);
 
 		currentGenre.forEach((song, j) => {
 			// Paramter: Bar-Chart
 
-			const barH = newGnere[genreName].length;
+			let genreLength = newGnere[genreName].length;
+			console.log(genreLength);
+
+			const barH = (stageHeight / barMax) * genreLength;
 
 			const barW = stageWidth;
 
@@ -74,13 +83,15 @@ function createElements() {
 			// Paramter: Bar-Chart
 			//barY = aktuelle new Genre * barH
 
-			const barY = indexSongs * barH - barH + 50;
+			//Variable mit der letzten Gnere Div höhe
+
+			const barY = indexSongs * barH + barH;
 
 			let barX = 0;
 
 			// Parameter: Map
-			const area = gmynd.map(song.popularity, 0, populationMax, 10, 2000);
-			const mapD = gmynd.circleRadius(area) * 2;
+			const area = gmynd.map(song.danceability, 0, 1, 0, 1000);
+			const mapD = gmynd.circleRadius(area);
 			const mapX = gmynd.map(song.valence, 0, 1, 0, stageWidth);
 			const mapY = gmynd.map(song.energy, 1, 0, stageHeight, 0);
 
@@ -90,9 +101,17 @@ function createElements() {
 			let color;
 
 			if (song.newGenre == "pop") {
-				color = "red";
+				color = "rgba(51, 102, 204, 0.3)";
 			} else {
-				color = "white";
+				if (song.newGenre == "rock") {
+					color = "rgb(51, 102, 104, 0.3)";
+				} else {
+					if (song.newGenre == "metal") {
+						color = "rgb(51, 102, 4, 0.3)";
+					} else {
+						color = "rgb(255, 255, 255, 0.3)";
+					}
+				}
 			}
 
 			// let color = getColor(song.newGenre, populationMax);
@@ -115,6 +134,14 @@ function createElements() {
 			});
 
 			stage.append(dot);
+
+			clickLabel = $("#clickLabel");
+			dot.click(() => {
+				console.log("click");
+				// /*  Dem geklickten Element den Text "Ländername: Einwohnerzahl" hinterlegen. */
+				clickLabel.text("Genre: " + song.genre);
+				clickLabel.show();
+			});
 		});
 
 		indexSongs++;
@@ -157,7 +184,7 @@ function drawMap() {
 				/* Kreis: deshalb Border-Radius 50% */
 				"border-radius": "50%",
 			},
-			1000
+			3000
 		);
 	});
 }
@@ -178,7 +205,7 @@ function drawBarChart() {
 				/* Reckteck: Deshalb Border-Radius 0 */
 				"border-radius": 0,
 			},
-			1000
+			3000
 		);
 	});
 }
