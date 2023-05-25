@@ -3,7 +3,7 @@ let stageHeight;
 let stageWidth;
 let groupedByContinent;
 let toggleViewButton = $("#toggleViewButton");
-let isShowingMap;
+let isShowing;
 
 let newGnere;
 let thisGenre;
@@ -43,20 +43,14 @@ function prepareData() {
 
 function createElements() {
 	let indexSongs = 0;
-
-	let barMax = songs.length;
 	//barMax = newGnere Summer aller Songs
-
-	// console.log(barMax);
+	let barMax = songs.length;
 
 	// Hilfsvariable: Map
 	const populationMax = gmynd.dataMax(songs, "popularity");
 
 	//Geht durch die Genres Durch für die Balken
 	for (let genreName in newGnere) {
-		// console.log(genreName);
-		/* Iteration durch die Länder des Kontinents */
-
 		let currentGenre = newGnere[genreName];
 		// console.log(currentGenre);
 
@@ -64,7 +58,7 @@ function createElements() {
 			// Paramter: Bar-Chart
 
 			let genreLength = newGnere[genreName].length;
-			console.log(genreLength);
+			// console.log(genreLength);
 
 			const barH = (stageHeight / barMax) * genreLength;
 
@@ -74,24 +68,20 @@ function createElements() {
 			let dot = $("<div></div>");
 			dot.addClass("song");
 
-			// Paramter: Bar-Chart
-			//barY = aktuelle new Genre * barH
-
-			//Variable mit der letzten Gnere Div höhe
-
-			const barY = indexSongs * barH + barH;
-
-			let barX = 0;
-
 			// Parameter: Map
 			const area = gmynd.map(song.danceability, 0, 1, 0, 1000);
 			const mapD = gmynd.circleRadius(area);
 			const mapX = gmynd.map(song.valence, 0, 1, 0, stageWidth);
 			const mapY = gmynd.map(song.energy, 1, 0, stageHeight, 0);
 
-			// if-schleife, dass genre.pop  = blau
-			// if (song.newGenre == "pop") {
-			// 	color = colors[0];
+			const barY = indexSongs + barH;
+
+			let barX = indexSongs * mapD * 2;
+
+			//Berechnung Ansicht 3
+			keyX = gmynd.map(song.key, 0, 12, 0, stageWidth);
+			keyY = gmynd.map(song.danceability, 1, 0, stageHeight, 0);
+
 			let color;
 
 			if (song.newGenre == "pop") {
@@ -108,33 +98,89 @@ function createElements() {
 				}
 			}
 
-			// let color = getColor(song.newGenre, populationMax);
-			//console.log(newGnere.genre);
-
-			/*  Dem Land die Parameter als Daten-Objekt zuweisen.
-                Somit bekommt jedes Land die nötigen Paramter für
-                die Animation. */
 			dot.data({
-				continent: song.continent,
+				genre: song.newGenre,
 				barX: barX,
 				barY: barY,
-				barW: barW,
-				barH: barH,
+
 				mapX: mapX,
 				mapY: mapY,
 				mapH: mapD,
 				mapW: mapD,
 				color: color,
+				keyX: keyX,
+				keyY: keyY,
 			});
 
 			stage.append(dot);
+
+			//wenn click dann link öffnen
 
 			clickLabel = $("#clickLabel");
 			dot.click(() => {
 				console.log("click");
 				// /*  Dem geklickten Element den Text "Ländername: Einwohnerzahl" hinterlegen. */
-				clickLabel.text("Genre: " + song.genre);
+				clickLabel.text(
+					"Artist: " +
+						song.artist +
+						"  " +
+						"Title: " +
+						song.song +
+						"  " +
+						"Year: " +
+						song.year +
+						"  " +
+						"Valence: " +
+						song.valence +
+						"  " +
+						"Energy: " +
+						song.energy +
+						"  " +
+						"press to Open"
+				);
+
+				clickLabel.click(() => {
+					searchQuery = 0;
+					searchUrl = 0;
+					openSong();
+				});
+
+				function openSong() {
+					const searchQuery = song.artist + " " + song.song; // Beispiel-Suchbefehl
+					const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+						searchQuery
+					)}`;
+					window.open(searchUrl);
+				}
+
 				clickLabel.show();
+			});
+
+			//Hoover Label
+
+			hoverLabel = $("#hoverLabel");
+			dot.mouseover(() => {
+				/*  Dem geklickten Element den Text "Ländername: Einwohnerzahl" hinterlegen. */
+				hoverLabel.text(song.artist);
+
+				//oftonal display: none auf : block setzen
+
+				let labely = mapY - 10;
+
+				hooverx = mapX + 25;
+				hoverLabel.css({
+					left: hooverx,
+					top: labely,
+				});
+				hoverLabel.show();
+			});
+
+			dot.mouseout(() => {
+				/*  Dem gehoverten Element die Klasse "hover" entfernen. */
+				dot.removeClass("hover");
+
+				/*  Dem gehoverten Element den Text "Ländernamen" löschen. */
+				$("#hoverLabel").text("");
 			});
 		});
 
@@ -144,8 +190,8 @@ function createElements() {
 	// indexSongs++;
 }
 
-function drawMap() {
-	isShowingMap = true;
+function drawKey() {
+	isShowing = "key";
 
 	/* jQuery-Objekte (Länder) iterieren (each-Schleife) */
 	$(".song").each(function () {
@@ -158,14 +204,35 @@ function drawMap() {
 			"background-color": dotData.color,
 		});
 
-		/*  Ohne Animation: setzen von CSS-Style,
-        $(this).css({
-            'height': dotData.mapH,
-            'width': dotData.mapW,
-            'left': dotData.mapX,
-            'top': dotData.mapY,
-            'border-radius': '50%'
-        }, 300);*/
+		/* Mit Animation:
+        Parameter mit den aktuellen werden zu den neuen Werte anmieren. */
+		$(this).animate(
+			{
+				height: dotData.mapH,
+				width: dotData.mapW,
+				left: dotData.keyX,
+				top: dotData.keyY,
+				/* Kreis: deshalb Border-Radius 50% */
+				"border-radius": "50%",
+			},
+			3000
+		);
+	});
+}
+
+function drawMap() {
+	isShowing = "map";
+
+	/* jQuery-Objekte (Länder) iterieren (each-Schleife) */
+	$(".song").each(function () {
+		/*  Für das jeweile Land an der aktuellen Position in der Schleife (each-Schleife) 
+            das Daten-Objekt auslesen und in einer Variable speichern. */
+		let dotData = $(this).data();
+
+		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
+		$(this).css({
+			"background-color": dotData.color,
+		});
 
 		/* Mit Animation:
         Parameter mit den aktuellen werden zu den neuen Werte anmieren. */
@@ -184,7 +251,7 @@ function drawMap() {
 }
 
 function drawBarChart() {
-	isShowingMap = false;
+	isShowing = "bar";
 
 	/* Gleich siehe drawMap-Funktion */
 	$(".song").each(function () {
@@ -192,12 +259,8 @@ function drawBarChart() {
 
 		$(this).animate(
 			{
-				height: dotData.barH,
-				width: dotData.barW,
 				left: dotData.barX,
 				top: dotData.barY,
-				/* Reckteck: Deshalb Border-Radius 0 */
-				"border-radius": 0,
 			},
 			3000
 		);
@@ -206,14 +269,20 @@ function drawBarChart() {
 
 function toggleView() {
 	$("#clickLabel").removeClass("active");
+	//verschiedene Ansichten
 
-	/* Stage leeren, wird nicht ausgeführt, da wir immer die selben Elemente nutzen */
-	// stage.empty();
-
-	if (isShowingMap) {
-		drawBarChart();
-	} else {
-		drawMap();
+	switch (isShowing) {
+		case "map":
+			drawBarChart();
+			break;
+		case "bar":
+			drawKey();
+			break;
+		case "key":
+			drawMap();
+			break;
+		default:
+			break;
 	}
 }
 
