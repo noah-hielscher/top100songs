@@ -9,7 +9,6 @@ let newGnere;
 let thisGenre;
 
 let clickedDot;
-const colors = ["#2a9d8f", "#e9c46a", "#e76f51"];
 
 $(function () {
 	stage = $("#renderer");
@@ -50,37 +49,41 @@ function createElements() {
 	const populationMax = gmynd.dataMax(songs, "popularity");
 
 	//Geht durch die Genres Durch für die Balken
+
+	let barY = 0;
+	let barX = 0;
 	for (let genreName in newGnere) {
 		let currentGenre = newGnere[genreName];
+		// console.log(currentGenre.length);
 		// console.log(currentGenre);
-
+		// console.log("Hallo");
+		// console.log(barY);
+		// console.log(barX);
 		currentGenre.forEach((song, j) => {
 			// Paramter: Bar-Chart
-
-			let genreLength = newGnere[genreName].length;
+			let genreLength = newGnere[genreName].count;
 			// console.log(genreLength);
-
-			const barH = (stageHeight / barMax) * genreLength;
-
-			const barW = stageWidth;
 
 			/* Virutelles jQuery-Element erstellen und Klasse song hizufügen. */
 			let dot = $("<div></div>");
 			dot.addClass("song");
 
-			// Parameter: Map
-			const area = gmynd.map(song.danceability, 0, 1, 0, 1000);
+			// Parameter: Map - Ansicht 1
+			const area = gmynd.map(song.danceability, 0, 1, 0, 100);
 			const mapD = gmynd.circleRadius(area);
+			// const mapD = 10;
 			const mapX = gmynd.map(song.valence, 0, 1, 0, stageWidth);
 			const mapY = gmynd.map(song.energy, 1, 0, stageHeight, 0);
 
-			const barY = indexSongs + barH;
+			//Parameter Barchart - Ansicht 2
+			barX = indexSongs * 10 + 10 / 2;
 
-			let barX = indexSongs * mapD * 2;
-
-			//Berechnung Ansicht 3
+			//Parameter Key - Ansicht 3
 			keyX = gmynd.map(song.key, 0, 12, 0, stageWidth);
 			keyY = gmynd.map(song.danceability, 1, 0, stageHeight, 0);
+
+			//für jedes Genre eine neue Farbe
+			// color = "red";
 
 			let color;
 
@@ -100,14 +103,18 @@ function createElements() {
 
 			dot.data({
 				genre: song.newGenre,
+				//Barchart
 				barX: barX,
 				barY: barY,
-
+				barH: 10,
+				barW: 10,
+				//Map
 				mapX: mapX,
 				mapY: mapY,
 				mapH: mapD,
 				mapW: mapD,
 				color: color,
+				//Key
 				keyX: keyX,
 				keyY: keyY,
 			});
@@ -135,6 +142,8 @@ function createElements() {
 						"  " +
 						"Energy: " +
 						song.energy +
+						"  " +
+						song.genre +
 						"  " +
 						"press to Open"
 				);
@@ -182,9 +191,10 @@ function createElements() {
 				/*  Dem gehoverten Element den Text "Ländernamen" löschen. */
 				$("#hoverLabel").text("");
 			});
+			indexSongs++;
 		});
-
-		indexSongs++;
+		//parameter Ansicht 2
+		barY = barY + 100;
 	}
 
 	// indexSongs++;
@@ -223,9 +233,9 @@ function drawKey() {
 function drawMap() {
 	isShowing = "map";
 
-	/* jQuery-Objekte (Länder) iterieren (each-Schleife) */
+	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
 	$(".song").each(function () {
-		/*  Für das jeweile Land an der aktuellen Position in der Schleife (each-Schleife) 
+		/*  Für das jeweilen Song an der aktuellen Position in der Schleife (each-Schleife) 
             das Daten-Objekt auslesen und in einer Variable speichern. */
 		let dotData = $(this).data();
 
@@ -257,8 +267,15 @@ function drawBarChart() {
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
+		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
+		$(this).css({
+			"background-color": dotData.color,
+		});
+
 		$(this).animate(
 			{
+				height: dotData.barH,
+				width: dotData.barW,
 				left: dotData.barX,
 				top: dotData.barY,
 			},
@@ -283,15 +300,5 @@ function toggleView() {
 			break;
 		default:
 			break;
-	}
-}
-
-function getColor(population, populationMax) {
-	if (population < populationMax / 20) {
-		return colors[0];
-	} else if (population < populationMax / 2) {
-		return colors[1];
-	} else {
-		return colors[2];
 	}
 }
