@@ -59,6 +59,8 @@ function createElements() {
 		// console.log("Hallo");
 		// console.log(barY);
 		// console.log(barX);
+
+		//Das jeweilige Genre wird durchgegangen, je nachdem wie lange das Genre.leght ist
 		currentGenre.forEach((song, j) => {
 			// Paramter: Bar-Chart
 			let genreLength = newGnere[genreName].count;
@@ -172,11 +174,29 @@ function createElements() {
 				/*  Dem geklickten Element den Text "Ländername: Einwohnerzahl" hinterlegen. */
 				hoverLabel.text(song.artist);
 
-				//oftonal display: none auf : block setzen
+				let labely;
+				let hooverx;
+				//je nach Ansicht das Hoover andere Kordinaten
+				if (isShowing === "map") {
+					console.log("map");
+					labely = mapY - 10;
+					hooverx = mapX + 25;
+				} else {
+					if (isShowing === "bar") {
+						console.log("bar");
+						labely = barY - 10;
+						hooverx = barX + 25;
+					} else {
+						console.log("key");
+						labely = keyY - 10;
+						hooverx = keyX + 25;
+					}
+				}
 
-				let labely = mapY - 10;
+				// let labely = mapY - 10;
+				// hooverx = mapX + 25;
 
-				hooverx = mapX + 25;
+				//css
 				hoverLabel.css({
 					left: hooverx,
 					top: labely,
@@ -262,7 +282,6 @@ function drawMap() {
 
 function drawBarChart() {
 	isShowing = "bar";
-
 	/* Gleich siehe drawMap-Funktion */
 	$(".song").each(function () {
 		let dotData = $(this).data();
