@@ -8,6 +8,8 @@ let isShowing;
 let newGnere;
 let thisGenre;
 
+let bar;
+
 let clickedDot;
 
 $(function () {
@@ -17,6 +19,7 @@ $(function () {
 
 	prepareData();
 	createElements();
+	// drawMap();
 	drawMap();
 
 	toggleViewButton.click(toggleView);
@@ -41,7 +44,7 @@ function prepareData() {
 }
 
 function createElements() {
-	let indexSongs = 0;
+	let indexX = 0;
 	//barMax = newGnere Summer aller Songs
 	let barMax = songs.length;
 
@@ -50,8 +53,13 @@ function createElements() {
 
 	//Geht durch die Genres Durch für die Balken
 
-	let barY = 0;
+	let dotWidth = 27;
+	let paddingRender = 10;
+	let gapY = dotWidth;
 	let barX = 0;
+	let barY = paddingRender;
+	let maxDotLength = Math.floor((stageWidth - paddingRender * 2) / dotWidth);
+
 	for (let genreName in newGnere) {
 		let currentGenre = newGnere[genreName];
 		// console.log(currentGenre.length);
@@ -78,10 +86,11 @@ function createElements() {
 			const mapY = gmynd.map(song.energy, 1, 0, stageHeight, 0);
 
 			//Parameter Barchart - Ansicht 2
-			barX = indexSongs * 10 + 10 / 2;
+
+			barX = indexX * dotWidth + paddingRender;
 
 			//Parameter Key - Ansicht 3
-			keyX = gmynd.map(song.key, 0, 12, 0, stageWidth);
+			keyX = gmynd.map(song.key + song.mode / 2, 0, 12.5, 50, stageWidth);
 			keyY = gmynd.map(song.danceability, 1, 0, stageHeight, 0);
 
 			//für jedes Genre eine neue Farbe
@@ -90,7 +99,7 @@ function createElements() {
 			let color;
 
 			if (song.newGenre == "pop") {
-				color = "rgba(51, 102, 204, 0.3)";
+				color = "rgba(83, 183, 89,0.3)";
 			} else {
 				if (song.newGenre == "rock") {
 					color = "rgb(51, 102, 104, 0.3)";
@@ -103,13 +112,15 @@ function createElements() {
 				}
 			}
 
+			dot.attr("genre", song.newGenre);
+
 			dot.data({
 				genre: song.newGenre,
 				//Barchart
 				barX: barX,
 				barY: barY,
-				barH: 10,
-				barW: 10,
+				barH: dotWidth,
+				barW: dotWidth,
 				//Map
 				mapX: mapX,
 				mapY: mapY,
@@ -211,13 +222,24 @@ function createElements() {
 				/*  Dem gehoverten Element den Text "Ländernamen" löschen. */
 				$("#hoverLabel").text("");
 			});
-			indexSongs++;
+			indexX++;
+
+			console.log(indexX);
+			//parameter Ansicht 2
+			if (maxDotLength === indexX) {
+				barY = barY + gapY;
+				barX = 0;
+				indexX = 0;
+			}
 		});
-		//parameter Ansicht 2
-		barY = barY + 100;
+
+		// Genre nächste Zeile
+		// barX = 0;
+		// indexX = 0;
+		// barY = barY + gapY;
 	}
 
-	// indexSongs++;
+	// indexX++;
 }
 
 function drawKey() {
