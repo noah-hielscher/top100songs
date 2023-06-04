@@ -62,7 +62,7 @@ body {
 	color: #ffffff;
 }
 #clickLabel1 {
-	background-color: rgb(87, 87, 87);
+	border-radius: 10px;
 	position: absolute;
 	padding: 0 5px;
 	line-height: 50px;
@@ -74,7 +74,7 @@ body {
 	white-space: nowrap;
 }
 #clickLabel2 {
-	background-color: rgb(87, 87, 87);
+	border-radius: 10px;
 	top: 50px;
 	position: absolute;
 	padding: 0 5px;

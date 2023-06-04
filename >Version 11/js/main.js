@@ -136,6 +136,11 @@ function createElements() {
 			dot.click(() => {
 				$(".song").removeClass("clicked");
 
+				//Clicklabel Hintergrundfarbe
+				clickLabel1.css({
+					backgroundColor: color,
+				});
+
 				clickLabel1.text(
 					"Artist: " +
 						song.artist +
@@ -194,6 +199,10 @@ function createElements() {
 
 			//Hold Label
 			dot.mousedown(() => {
+				//MouseDown Label Hintergrundfarbe
+				clickLabel2.css({
+					backgroundColor: color,
+				});
 				holdTimeout = setTimeout(() => {
 					// Hier wird der "Hold"-Effekt-Code ausgeführt
 					clickLabel2.text(
@@ -379,9 +388,10 @@ function drawBarChart() {
 }
 
 function toggleView() {
-	$("#clickLabel1").removeClass("active");
+	//Labels entfernen
+	$("#clickLabel1").text("");
+	$("#clickLabel2").text("");
 	//verschiedene Ansichten
-
 	switch (isShowing) {
 		case "map":
 			drawBarChart();
