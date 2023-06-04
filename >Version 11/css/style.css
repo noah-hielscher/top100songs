@@ -42,10 +42,40 @@ body {
 .song.clicked {
 	background-color: #7983e1 !important;
 }
+/* .song.hovered {
+	position: "absolute";
+} */
 
-#hoverLabel,
-#clickLabel {
+#hoverLabel {
+	position: absolute;
+	padding: 0 5px;
+	line-height: 30px;
+	border-radius: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	display: none;
+	z-index: 1000;
+	font-size: 14px;
+	text-align: center;
+	border-radius: "10px";
+	white-space: nowrap;
+	color: #ffffff;
+}
+#clickLabel1 {
 	background-color: rgb(87, 87, 87);
+	position: absolute;
+	padding: 0 5px;
+	line-height: 50px;
+	display: none;
+	z-index: 1000;
+	font-size: 14px;
+	text-align: center;
+	border-radius: "10px";
+	white-space: nowrap;
+}
+#clickLabel2 {
+	background-color: rgb(87, 87, 87);
+	top: 50px;
 	position: absolute;
 	padding: 0 5px;
 	line-height: 50px;

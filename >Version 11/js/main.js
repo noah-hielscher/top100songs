@@ -8,6 +8,8 @@ let isShowing;
 let newGnere;
 let thisGenre;
 
+let holdTimeout;
+
 let bar;
 
 //Farbe
@@ -89,7 +91,6 @@ function createElements() {
 			// Parameter: Map - Ansicht 1
 			const area = gmynd.map(song.danceability, 0, 1, 0, 100);
 			const mapD = gmynd.circleRadius(area);
-			// const mapD = 10;
 			const mapX = gmynd.map(song.valence, 0, 1, 0, stageWidth);
 			const mapY = gmynd.map(song.energy, 1, 0, stageHeight, 0);
 
@@ -103,6 +104,7 @@ function createElements() {
 
 			//Farbe der Dots
 			let color = colorGenres[colorIndex];
+			//Farbe der Keys
 
 			dot.attr("genre", song.newGenre);
 
@@ -127,12 +129,14 @@ function createElements() {
 
 			stage.append(dot);
 
-			clickLabel = $("#clickLabel");
+			clickLabel1 = $("#clickLabel1");
+			clickLabel2 = $("#clickLabel2");
 
+			//Click Label
 			dot.click(() => {
 				$(".song").removeClass("clicked");
 
-				clickLabel.text(
+				clickLabel1.text(
 					"Artist: " +
 						song.artist +
 						"  " +
@@ -153,7 +157,7 @@ function createElements() {
 						"press to Open"
 				);
 
-				clickLabel.click(() => {
+				clickLabel1.click(() => {
 					searchQuery = 0;
 					searchUrl = 0;
 					openSong();
@@ -184,27 +188,62 @@ function createElements() {
 				//dot doe klasse .song.clicked
 				dot.addClass("song clicked");
 
-				clickLabel.show();
+				clickLabel1.show();
+				clickLabel2.show();
+			});
+
+			//Hold Label
+			dot.mousedown(() => {
+				holdTimeout = setTimeout(() => {
+					// Hier wird der "Hold"-Effekt-Code ausgeführt
+					clickLabel2.text(
+						"Artist: " +
+							song.artist +
+							"  " +
+							"Title: " +
+							song.song +
+							"  " +
+							"Year: " +
+							song.year +
+							"  " +
+							"Valence: " +
+							song.valence +
+							"  " +
+							"Energy: " +
+							song.energy +
+							"  " +
+							song.genre +
+							"  " +
+							"press to Open"
+					);
+					console.log("Hold event");
+				}, 1000); // Ändern Sie die Zeit (in Millisekunden) nach Bedarf
+			});
+
+			dot.mouseup(() => {
+				clearTimeout(holdTimeout);
+				clickLabel2.text("");
 			});
 
 			//Hoover Label
-
 			hoverLabel = $("#hoverLabel");
 			dot.mouseover(() => {
-				hoverLabel.text(song.artist);
+				hoverLabel.text(song.song);
 
-				let labely;
+				let labely = $(this).data();
+				console.log(labely);
+
 				let hooverx;
 
 				if (isShowing === "map") {
 					console.log("map");
-					labely = mapY - 10;
-					hooverx = mapX + 25;
+					labely = mapY - 13;
+					hooverx = mapX + 15;
 				} else {
 					if (isShowing === "bar") {
 						console.log("bar");
-						labely = barY - 10;
-						hooverx = barX + 25;
+						labely = barY - 13;
+						hooverx = barX + 15;
 					} else {
 						console.log("key");
 						labely = keyY - 10;
@@ -212,20 +251,28 @@ function createElements() {
 					}
 				}
 
-				// let labely = mapY - 10;
-				// hooverx = mapX + 25;
+				//Dot hover effect
+				dot.addClass("song hovered").css({
+					height: mapD * 2,
+					width: mapD * 2,
+					backgroundColor: color,
+					left: mapX - mapD / 2,
+					top: mapY - mapD / 2,
+				});
 
 				//css
 				hoverLabel.css({
 					left: hooverx,
 					top: labely,
+					backgroundColor: color,
 				});
 				hoverLabel.show();
 			});
 
 			dot.mouseout(() => {
 				/*  Dem gehoverten Element die Klasse "hover" entfernen. */
-				dot.removeClass("hover");
+
+				dot.removeClass("hovered");
 				$("#hoverLabel").text("");
 			});
 			indexX++;
@@ -332,7 +379,7 @@ function drawBarChart() {
 }
 
 function toggleView() {
-	$("#clickLabel").removeClass("active");
+	$("#clickLabel1").removeClass("active");
 	//verschiedene Ansichten
 
 	switch (isShowing) {
