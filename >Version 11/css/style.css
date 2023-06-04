@@ -15,7 +15,7 @@ body {
 #renderer {
 	width: 100vw;
 	height: 100vh;
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0);
 	position: relative;
 }
 
@@ -40,8 +40,9 @@ body {
 }
 
 .song.clicked {
-	background-color: rgb(255, 0, 187) !important;
+	background-color: #7983e1 !important;
 }
+
 #hoverLabel,
 #clickLabel {
 	background-color: rgb(87, 87, 87);

@@ -10,6 +10,22 @@ let thisGenre;
 
 let bar;
 
+//Farbe
+const colorGenres = [
+	"#D2A18D",
+	"#E8DAB2",
+	"#4F6D7A",
+	"#C0D6DF",
+	"#D4ABAB",
+	"#ACBFA4",
+	"#E2E8CE",
+	"#947EB0",
+	"#CDC392",
+	"#D17D90",
+	"#D5C6E0",
+	"#CCC5B9",
+];
+
 let clickedDot;
 
 $(function () {
@@ -19,7 +35,6 @@ $(function () {
 
 	prepareData();
 	createElements();
-	// drawMap();
 	drawMap();
 
 	toggleViewButton.click(toggleView);
@@ -60,20 +75,13 @@ function createElements() {
 	let barY = paddingRender;
 	let maxDotLength = Math.floor((stageWidth - paddingRender * 2) / dotWidth);
 
+	let colorIndex = 0;
 	for (let genreName in newGnere) {
 		let currentGenre = newGnere[genreName];
-		// console.log(currentGenre.length);
-		// console.log(currentGenre);
-		// console.log("Hallo");
-		// console.log(barY);
-		// console.log(barX);
+		console.log(currentGenre);
 
 		//Das jeweilige Genre wird durchgegangen, je nachdem wie lange das Genre.leght ist
 		currentGenre.forEach((song, j) => {
-			// Paramter: Bar-Chart
-			let genreLength = newGnere[genreName].count;
-			// console.log(genreLength);
-
 			/* Virutelles jQuery-Element erstellen und Klasse song hizufügen. */
 			let dot = $("<div></div>");
 			dot.addClass("song");
@@ -93,29 +101,15 @@ function createElements() {
 			keyX = gmynd.map(song.key + song.mode / 2, 0, 12.5, 50, stageWidth);
 			keyY = gmynd.map(song.danceability, 1, 0, stageHeight, 0);
 
-			//für jedes Genre eine neue Farbe
-			// color = "red";
-
-			let color;
-
-			if (song.newGenre == "pop") {
-				color = "rgba(83, 183, 89,0.3)";
-			} else {
-				if (song.newGenre == "rock") {
-					color = "rgb(51, 102, 104, 0.3)";
-				} else {
-					if (song.newGenre == "metal") {
-						color = "rgb(51, 102, 4, 0.3)";
-					} else {
-						color = "rgb(55, 255, 255, 0.3)";
-					}
-				}
-			}
+			//Farbe der Dots
+			let color = colorGenres[colorIndex];
 
 			dot.attr("genre", song.newGenre);
 
 			dot.data({
+				//Allgemein
 				genre: song.newGenre,
+				color: color,
 				//Barchart
 				barX: barX,
 				barY: barY,
@@ -126,7 +120,6 @@ function createElements() {
 				mapY: mapY,
 				mapH: mapD,
 				mapW: mapD,
-				color: color,
 				//Key
 				keyX: keyX,
 				keyY: keyY,
@@ -134,12 +127,11 @@ function createElements() {
 
 			stage.append(dot);
 
-			//wenn click dann link öffnen
-
 			clickLabel = $("#clickLabel");
+
 			dot.click(() => {
-				console.log("click");
-				// /*  Dem geklickten Element den Text "Ländername: Einwohnerzahl" hinterlegen. */
+				$(".song").removeClass("clicked");
+
 				clickLabel.text(
 					"Artist: " +
 						song.artist +
@@ -166,6 +158,21 @@ function createElements() {
 					searchUrl = 0;
 					openSong();
 				});
+				//doppelclick - alle im selben Genre eine Farbe
+				dot.dblclick(() => {
+					//Welche Eigenschaft hat der angeklickte Dot
+					clickedDot = song.newGenre;
+					console.log(clickedDot);
+
+					// Durch contitnete durcheterieren
+					$(".song").each(function () {
+						let thisGenre = $(this).data("genre");
+						console.log(thisGenre);
+						if (thisGenre == clickedDot) {
+							$(this).addClass("song clicked");
+						}
+					});
+				});
 
 				function openSong() {
 					const searchQuery = song.artist + " " + song.song; // Beispiel-Suchbefehl
@@ -174,6 +181,8 @@ function createElements() {
 					)}`;
 					window.open(searchUrl);
 				}
+				//dot doe klasse .song.clicked
+				dot.addClass("song clicked");
 
 				clickLabel.show();
 			});
@@ -182,12 +191,11 @@ function createElements() {
 
 			hoverLabel = $("#hoverLabel");
 			dot.mouseover(() => {
-				/*  Dem geklickten Element den Text "Ländername: Einwohnerzahl" hinterlegen. */
 				hoverLabel.text(song.artist);
 
 				let labely;
 				let hooverx;
-				//je nach Ansicht das Hoover andere Kordinaten
+
 				if (isShowing === "map") {
 					console.log("map");
 					labely = mapY - 10;
@@ -218,13 +226,10 @@ function createElements() {
 			dot.mouseout(() => {
 				/*  Dem gehoverten Element die Klasse "hover" entfernen. */
 				dot.removeClass("hover");
-
-				/*  Dem gehoverten Element den Text "Ländernamen" löschen. */
 				$("#hoverLabel").text("");
 			});
 			indexX++;
 
-			console.log(indexX);
 			//parameter Ansicht 2
 			if (maxDotLength === indexX) {
 				barY = barY + gapY;
@@ -237,6 +242,7 @@ function createElements() {
 		// barX = 0;
 		// indexX = 0;
 		// barY = barY + gapY;
+		colorIndex++;
 	}
 
 	// indexX++;
