@@ -45,6 +45,9 @@ body {
 /* .song.hovered {
 	position: "absolute";
 } */
+.song-info {
+	line-height: 30px;
+}
 
 #hoverLabel {
 	position: absolute;
@@ -64,25 +67,33 @@ body {
 #clickLabel1 {
 	border-radius: 10px;
 	position: absolute;
-	padding: 0 5px;
+	margin: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	line-height: 50px;
 	display: none;
 	z-index: 1000;
 	font-size: 14px;
-	text-align: center;
+	text-align: left;
 	border-radius: "10px";
 	white-space: nowrap;
 }
 #clickLabel2 {
 	border-radius: 10px;
-	top: 50px;
 	position: absolute;
-	padding: 0 5px;
+	/* left: 30px; */
+	margin: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	line-height: 50px;
 	display: none;
 	z-index: 1000;
 	font-size: 14px;
-	text-align: center;
+	text-align: left;
 	border-radius: "10px";
 	white-space: nowrap;
 }

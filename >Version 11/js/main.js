@@ -141,25 +141,25 @@ function createElements() {
 					backgroundColor: color,
 				});
 
-				clickLabel1.text(
-					"Artist: " +
+				clickLabel1.html(
+					"<p class='song-info'>Artist: " +
 						song.artist +
-						"  " +
+						"<br>" +
 						"Title: " +
 						song.song +
-						"  " +
+						"<br>" +
 						"Year: " +
 						song.year +
-						"  " +
+						"<br>" +
 						"Valence: " +
 						song.valence +
-						"  " +
+						"<br>" +
 						"Energy: " +
 						song.energy +
-						"  " +
+						"<br>" +
 						song.genre +
-						"  " +
-						"press to Open"
+						"<br>" +
+						"press to Open</p>"
 				);
 
 				clickLabel1.click(() => {
@@ -194,36 +194,41 @@ function createElements() {
 				dot.addClass("song clicked");
 
 				clickLabel1.show();
-				clickLabel2.show();
+				// clickLabel2.show();
 			});
 
 			//Hold Label
 			dot.mousedown(() => {
-				//MouseDown Label Hintergrundfarbe
-				clickLabel2.css({
-					backgroundColor: color,
-				});
+				//variable die Breite von Clciklabel2
+				let labelWidth = clickLabel1.width();
+				console.log(labelWidth);
+
 				holdTimeout = setTimeout(() => {
-					// Hier wird der "Hold"-Effekt-Code ausgeführt
-					clickLabel2.text(
-						"Artist: " +
+					clickLabel2.css({
+						backgroundColor: color,
+						left: labelWidth + 50,
+					});
+					clickLabel2.show();
+
+					clickLabel2.html(
+						"<p class='song-info'>Artist: " +
 							song.artist +
-							"  " +
+							"<br>" +
 							"Title: " +
 							song.song +
-							"  " +
+							"<br>" +
 							"Year: " +
 							song.year +
-							"  " +
+							"<br>" +
 							"Valence: " +
 							song.valence +
-							"  " +
+							"<br>" +
 							"Energy: " +
 							song.energy +
-							"  " +
+							"<br>" +
 							song.genre +
-							"  " +
-							"press to Open"
+							"<br>" +
+							"press to Open</p>"
 					);
 					console.log("Hold event");
 				}, 1000); // Ändern Sie die Zeit (in Millisekunden) nach Bedarf
@@ -231,7 +236,7 @@ function createElements() {
 
 			dot.mouseup(() => {
 				clearTimeout(holdTimeout);
-				clickLabel2.text("");
+				clickLabel2.hide();
 			});
 
 			//Hoover Label
@@ -389,8 +394,8 @@ function drawBarChart() {
 
 function toggleView() {
 	//Labels entfernen
-	$("#clickLabel1").text("");
-	$("#clickLabel2").text("");
+	$("#clickLabel1").hide();
+	$("#clickLabel2").hide();
 	//verschiedene Ansichten
 	switch (isShowing) {
 		case "map":
