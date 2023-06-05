@@ -42,9 +42,14 @@ body {
 .song.clicked {
 	background-color: #7983e1 !important;
 }
-/* .song.hovered {
-	position: "absolute";
-} */
+.song.unClicked {
+	background-color: "" !important;
+}
+.song.hovered {
+	padding: 10px;
+	border-right: 50px;
+	margin-bottom: 15px;
+}
 .song-info {
 	line-height: 30px;
 }
@@ -89,6 +94,21 @@ body {
 	padding-right: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	line-height: 50px;
+	display: none;
+	z-index: 1000;
+	font-size: 14px;
+	text-align: left;
+	border-radius: "10px";
+	white-space: nowrap;
+}
+#resetLabel {
+	border-radius: 10px;
+	position: absolute;
+	bottom: 30px;
+	margin: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	line-height: 50px;
 	display: none;
 	z-index: 1000;

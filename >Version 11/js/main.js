@@ -91,8 +91,8 @@ function createElements() {
 			// Parameter: Map - Ansicht 1
 			const area = gmynd.map(song.danceability, 0, 1, 0, 100);
 			const mapD = gmynd.circleRadius(area);
-			const mapX = gmynd.map(song.valence, 0, 1, 0, stageWidth);
-			const mapY = gmynd.map(song.energy, 1, 0, stageHeight, 0);
+			const mapX = gmynd.map(song.valence, 1, 0, 0, stageWidth);
+			const mapY = gmynd.map(song.energy, 0, 1, stageHeight, 0);
 
 			//Parameter Barchart - Ansicht 2
 
@@ -131,6 +131,7 @@ function createElements() {
 
 			clickLabel1 = $("#clickLabel1");
 			clickLabel2 = $("#clickLabel2");
+			resetLabel = $("#resetLabel");
 
 			//Click Label
 			dot.click(() => {
@@ -157,18 +158,31 @@ function createElements() {
 						"Energy: " +
 						song.energy +
 						"<br>" +
+						"Genre: " +
 						song.genre +
 						"<br>" +
 						"press to Open</p>"
 				);
 
 				clickLabel1.click(() => {
-					searchQuery = 0;
-					searchUrl = 0;
+					let searchQuery = 0;
+					let searchUrl = 0;
 					openSong();
 				});
 				//doppelclick - alle im selben Genre eine Farbe
 				dot.dblclick(() => {
+					//Reset Label
+					resetLabel.text("<- Reset View" + " " + song.newGenre);
+					resetLabel.css({
+						backgroundColor: color,
+					});
+					resetLabel.click(() => {
+						$(".song").removeClass("clicked");
+						$(".song").show();
+						resetLabel.hide();
+						clickLabel1.hide();
+					});
+
 					//Welche Eigenschaft hat der angeklickte Dot
 					clickedDot = song.newGenre;
 					console.log(clickedDot);
@@ -176,16 +190,19 @@ function createElements() {
 					// Durch contitnete durcheterieren
 					$(".song").each(function () {
 						let thisGenre = $(this).data("genre");
+
 						console.log(thisGenre);
 						if (thisGenre == clickedDot) {
 							$(this).addClass("song clicked");
+						} else {
+							$(this).hide();
 						}
 					});
 				});
 
 				function openSong() {
-					const searchQuery = song.artist + " " + song.song; // Beispiel-Suchbefehl
-					const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+					searchQuery = song.artist + " " + song.song;
+					searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
 						searchQuery
 					)}`;
 					window.open(searchUrl);
@@ -194,7 +211,7 @@ function createElements() {
 				dot.addClass("song clicked");
 
 				clickLabel1.show();
-				// clickLabel2.show();
+				resetLabel.show();
 			});
 
 			//Hold Label
@@ -226,6 +243,7 @@ function createElements() {
 							"Energy: " +
 							song.energy +
 							"<br>" +
+							"Genre: " +
 							song.genre +
 							"<br>" +
 							"press to Open</p>"
@@ -266,13 +284,7 @@ function createElements() {
 				}
 
 				//Dot hover effect
-				dot.addClass("song hovered").css({
-					height: mapD * 2,
-					width: mapD * 2,
-					backgroundColor: color,
-					left: mapX - mapD / 2,
-					top: mapY - mapD / 2,
-				});
+				dot.addClass("song hovered");
 
 				//css
 				hoverLabel.css({
@@ -285,8 +297,8 @@ function createElements() {
 
 			dot.mouseout(() => {
 				/*  Dem gehoverten Element die Klasse "hover" entfernen. */
-
-				dot.removeClass("hovered");
+				// dot.removeClass("hovered");
+				$(".song").removeClass("hovered");
 				$("#hoverLabel").text("");
 			});
 			indexX++;
@@ -334,7 +346,8 @@ function drawKey() {
 				/* Kreis: deshalb Border-Radius 50% */
 				"border-radius": "50%",
 			},
-			3000
+			5000,
+			"swing"
 		);
 	});
 }
@@ -364,7 +377,8 @@ function drawMap() {
 				/* Kreis: deshalb Border-Radius 50% */
 				"border-radius": "50%",
 			},
-			3000
+			5000,
+			"swing"
 		);
 	});
 }
@@ -387,7 +401,8 @@ function drawBarChart() {
 				left: dotData.barX,
 				top: dotData.barY,
 			},
-			3000
+			5000,
+			"swing"
 		);
 	});
 }
