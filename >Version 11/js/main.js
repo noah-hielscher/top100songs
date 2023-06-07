@@ -171,6 +171,8 @@ function createElements() {
 				});
 				//doppelclick - alle im selben Genre eine Farbe
 				dot.dblclick(() => {
+					//Bei Doppelclick Farbe entfernen
+					$(".song").removeClass("clicked");
 					//Reset Label
 					resetLabel.text("<- Reset View" + " " + song.newGenre);
 					resetLabel.css({
@@ -193,7 +195,7 @@ function createElements() {
 
 						console.log(thisGenre);
 						if (thisGenre == clickedDot) {
-							$(this).addClass("song clicked");
+							// $(this).addClass("song clicked");
 						} else {
 							$(this).hide();
 						}
@@ -265,26 +267,27 @@ function createElements() {
 				let labely = $(this).data();
 				console.log(labely);
 
+				let dotData = dot.data();
+
 				let hooverx;
 
 				if (isShowing === "map") {
 					console.log("map");
-					labely = mapY - 13;
-					hooverx = mapX + 15;
+					labely = dotData.mapY - 13;
+					hooverx = dotData.mapX + 20;
+					//Dot hover effect
+					dot.addClass("song hovered");
 				} else {
 					if (isShowing === "bar") {
-						console.log("bar");
-						labely = barY - 13;
-						hooverx = barX + 15;
+						labely = dotData.barY - 2;
+						hooverx = dotData.barX + 30;
 					} else {
-						console.log("key");
-						labely = keyY - 10;
-						hooverx = keyX + 25;
+						labely = dotData.keyY - 13;
+						hooverx = dotData.keyX + 20;
+						//Dot hover effect
+						dot.addClass("song hovered");
 					}
 				}
-
-				//Dot hover effect
-				dot.addClass("song hovered");
 
 				//css
 				hoverLabel.css({

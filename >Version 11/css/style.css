@@ -41,14 +41,21 @@ body {
 
 .song.clicked {
 	background-color: #7983e1 !important;
+	padding: 10px;
+	border-right: 50px;
+	margin-bottom: 15px;
+	transform: translate(-30%, -30%);
 }
 .song.unClicked {
 	background-color: "" !important;
 }
 .song.hovered {
+	/* display: flex;
+	justify-content: center; */
 	padding: 10px;
 	border-right: 50px;
 	margin-bottom: 15px;
+	transform: translate(-30%, -30%);
 }
 .song-info {
 	line-height: 30px;
