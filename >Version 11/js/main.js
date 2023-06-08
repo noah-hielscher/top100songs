@@ -10,6 +10,9 @@ let thisGenre;
 
 let holdTimeout;
 
+let clickLabelInput1;
+let clickLabelInput2;
+
 let bar;
 
 //Farbe
@@ -68,14 +71,19 @@ function createElements() {
 	// Hilfsvariable: Map
 	const populationMax = gmynd.dataMax(songs, "popularity");
 
-	//Geht durch die Genres Durch für die Balken
-
 	let dotWidth = 27;
 	let paddingRender = 10;
 	let gapY = dotWidth;
 	let barX = 0;
 	let barY = paddingRender;
 	let maxDotLength = Math.floor((stageWidth - paddingRender * 2) / dotWidth);
+
+	//Dancebility Max
+	let danceabilityMax = gmynd.dataMax(songs, "danceability");
+	//valence Max
+	let valenceMax = gmynd.dataMax(songs, "valence");
+	//energie Max
+	let energyMax = gmynd.dataMax(songs, "energy");
 
 	let colorIndex = 0;
 	for (let genreName in newGnere) {
@@ -89,10 +97,16 @@ function createElements() {
 			dot.addClass("song");
 
 			// Parameter: Map - Ansicht 1
-			const area = gmynd.map(song.danceability, 0, 1, 0, 100);
+			const area = gmynd.map(
+				song.danceability,
+				0,
+				danceabilityMax,
+				0,
+				100
+			);
 			const mapD = gmynd.circleRadius(area);
-			const mapX = gmynd.map(song.valence, 1, 0, 0, stageWidth);
-			const mapY = gmynd.map(song.energy, 0, 1, stageHeight, 0);
+			const mapX = gmynd.map(song.valence, valenceMax, 0, 0, stageWidth);
+			const mapY = gmynd.map(song.energy, 0, energyMax, stageHeight, 0);
 
 			//Parameter Barchart - Ansicht 2
 
@@ -100,11 +114,16 @@ function createElements() {
 
 			//Parameter Key - Ansicht 3
 			keyX = gmynd.map(song.key + song.mode / 2, 0, 12.5, 50, stageWidth);
-			keyY = gmynd.map(song.danceability, 1, 0, stageHeight, 0);
+			keyY = gmynd.map(
+				song.danceability,
+				danceabilityMax,
+				0,
+				stageHeight,
+				0
+			);
 
 			//Farbe der Dots
 			let color = colorGenres[colorIndex];
-			//Farbe der Keys
 
 			dot.attr("genre", song.newGenre);
 
@@ -142,8 +161,10 @@ function createElements() {
 					backgroundColor: color,
 				});
 
-				clickLabel1.html(
-					"<p class='song-info'>Artist: " +
+				//je nach Ansciht unterschiedliche Informationen im Label
+				if (isShowing === "map") {
+					clickLabelInput1 =
+						"<p class='song-info'>Artist: " +
 						song.artist +
 						"<br>" +
 						"Title: " +
@@ -161,8 +182,48 @@ function createElements() {
 						"Genre: " +
 						song.genre +
 						"<br>" +
-						"press to Open</p>"
-				);
+						"press to Open</p>";
+				} else {
+					if (isShowing === "bar") {
+						clickLabelInput1 =
+							"<p class='song-info'>Artist: " +
+							song.artist +
+							"<br>" +
+							"Title: " +
+							song.song +
+							"<br>" +
+							"Year: " +
+							song.year +
+							"<br>" +
+							"Genre: " +
+							song.genre +
+							"<br>" +
+							"press to Open</p>";
+					} else {
+						clickLabelInput1 =
+							"<p class='song-info'>Artist: " +
+							song.artist +
+							"<br>" +
+							"Title: " +
+							song.song +
+							"<br>" +
+							"Year: " +
+							song.year +
+							"<br>" +
+							"Key: " +
+							song.key +
+							"<br>" +
+							"Dancebility: " +
+							song.danceability +
+							"<br>" +
+							"Genre: " +
+							song.genre +
+							"<br>" +
+							"press to Open</p>";
+					}
+				}
+
+				clickLabel1.html(clickLabelInput1);
 
 				clickLabel1.click(() => {
 					let searchQuery = 0;
@@ -210,8 +271,18 @@ function createElements() {
 					window.open(searchUrl);
 				}
 				//dot doe klasse .song.clicked
-				dot.addClass("song clicked");
+				if (isShowing === "map") {
+					dot.addClass("song clicked transform");
+				} else {
+					if (isShowing === "bar") {
+						dot.addClass("song clicked");
+					} else {
+						dot.addClass("song clicked transform");
+					}
+				}
+				// dot.addClass("song clicked");
 
+				//"song clicked" css bearbeiten
 				clickLabel1.show();
 				resetLabel.show();
 			});
@@ -229,8 +300,9 @@ function createElements() {
 					});
 					clickLabel2.show();
 
-					clickLabel2.html(
-						"<p class='song-info'>Artist: " +
+					if (isShowing === "map") {
+						clickLabelInput2 =
+							"<p class='song-info'>Artist: " +
 							song.artist +
 							"<br>" +
 							"Title: " +
@@ -248,8 +320,47 @@ function createElements() {
 							"Genre: " +
 							song.genre +
 							"<br>" +
-							"press to Open</p>"
-					);
+							"press to Open</p>";
+					} else {
+						if (isShowing === "bar") {
+							clickLabelInput2 =
+								"<p class='song-info'>Artist: " +
+								song.artist +
+								"<br>" +
+								"Title: " +
+								song.song +
+								"<br>" +
+								"Year: " +
+								song.year +
+								"<br>" +
+								"Genre: " +
+								song.genre +
+								"<br>" +
+								"press to Open</p>";
+						} else {
+							clickLabelInput2 =
+								"<p class='song-info'>Artist: " +
+								song.artist +
+								"<br>" +
+								"Title: " +
+								song.song +
+								"<br>" +
+								"Year: " +
+								song.year +
+								"<br>" +
+								"Key: " +
+								song.key +
+								"<br>" +
+								"Dancebility: " +
+								song.danceability +
+								"<br>" +
+								"Genre: " +
+								song.genre +
+								"<br>" +
+								"press to Open</p>";
+						}
+					}
+					clickLabel2.html(clickLabelInput2);
 					console.log("Hold event");
 				}, 1000); // Ändern Sie die Zeit (in Millisekunden) nach Bedarf
 			});
@@ -327,19 +438,16 @@ function createElements() {
 function drawKey() {
 	isShowing = "key";
 
-	/* jQuery-Objekte (Länder) iterieren (each-Schleife) */
 	$(".song").each(function () {
-		/*  Für das jeweile Land an der aktuellen Position in der Schleife (each-Schleife) 
-            das Daten-Objekt auslesen und in einer Variable speichern. */
 		let dotData = $(this).data();
 
-		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
+		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
+		$(".song").addClass("transform");
+
 		$(this).css({
 			"background-color": dotData.color,
 		});
 
-		/* Mit Animation:
-        Parameter mit den aktuellen werden zu den neuen Werte anmieren. */
 		$(this).animate(
 			{
 				height: dotData.mapH,
@@ -360,9 +468,10 @@ function drawMap() {
 
 	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
 	$(".song").each(function () {
-		/*  Für das jeweilen Song an der aktuellen Position in der Schleife (each-Schleife) 
-            das Daten-Objekt auslesen und in einer Variable speichern. */
 		let dotData = $(this).data();
+
+		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
+		$(".song").addClass("transform");
 
 		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
 		$(this).css({
@@ -388,9 +497,13 @@ function drawMap() {
 
 function drawBarChart() {
 	isShowing = "bar";
+
 	/* Gleich siehe drawMap-Funktion */
 	$(".song").each(function () {
 		let dotData = $(this).data();
+
+		/* Klasse transform entfernen, damit die Animation richtig positioniert ist. */
+		$(".song").removeClass("transform");
 
 		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
 		$(this).css({
