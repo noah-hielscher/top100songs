@@ -127,6 +127,13 @@ function createElements() {
 
 			dot.attr("genre", song.newGenre);
 
+			dot.css({
+				// 'height': mapD,
+				// 'width': mapD,
+				left: mapX,
+				top: mapY,
+			});
+
 			dot.data({
 				//Allgemein
 				genre: song.newGenre,
@@ -466,12 +473,13 @@ function drawKey() {
 function drawMap() {
 	isShowing = "map";
 
+	console.log($(".song"));
 	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
 		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
-		$(".song").addClass("transform");
+		// $(".song").addClass("transform");
 
 		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
 		$(this).css({
@@ -479,13 +487,13 @@ function drawMap() {
 		});
 
 		/* Mit Animation:
-        Parameter mit den aktuellen werden zu den neuen Werte anmieren. */
+		Parameter mit den aktuellen werden zu den neuen Werte anmieren. */
 		$(this).animate(
 			{
 				height: dotData.mapH,
 				width: dotData.mapW,
-				left: dotData.mapX,
-				top: dotData.mapY,
+				// left: dotData.mapX,
+				// top: dotData.mapY,
 				/* Kreis: deshalb Border-Radius 50% */
 				"border-radius": "50%",
 			},
@@ -503,23 +511,31 @@ function drawBarChart() {
 		let dotData = $(this).data();
 
 		/* Klasse transform entfernen, damit die Animation richtig positioniert ist. */
-		$(".song").removeClass("transform");
-
-		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
-		$(this).css({
-			"background-color": dotData.color,
-		});
+		// $(".song").removeClass("transform");
 
 		$(this).animate(
 			{
-				height: dotData.barH,
-				width: dotData.barW,
 				left: dotData.barX,
 				top: dotData.barY,
+				height: dotData.barH,
+				width: dotData.barW,
 			},
 			5000,
 			"swing"
 		);
+
+		// let that = this
+		// setTimeout(function () {
+		// 	console.log("timeout");
+		// 	$(that).animate(
+		// 		{
+		// 			height: dotData.barH,
+		// 			width: dotData.barW,
+		// 		},
+		// 		5000,
+		// 		"swing"
+		// 	);
+		// }, 2500)
 	});
 }
 
