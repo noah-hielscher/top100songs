@@ -50,31 +50,13 @@ $(function () {
 	// drawMap();
 	drawStart();
 
-	info.click(drawStart);
-	energy.click(drawMap);
-	genres.click(drawBarChart);
-	keys.click(drawKey);
-
-	info.hover(function () {
-		$(this).addClass("hoveredMenu");
-	});
-	info.mouseleave(function () {
-		$(this).removeClass("hoveredMenu");
-	});
+	menubar.hover(menubar());
 });
 
 function prepareData() {
 	songs.forEach((song) => {
 		song.newGenre = song.genre.split(",")[0];
 	});
-	//Anzahl
-	// console.log(gmynd.cumulateData(songs, "newGenre"));
-
-	// newGnerea = gmynd.cumulateData(songs, "newGenre");
-	// console.log(newGnerea);
-
-	//Eigenschaften
-	// console.log(gmynd.groupData(songs, "newGenre"));
 
 	newGnere = gmynd.groupData(songs, "newGenre");
 
@@ -461,6 +443,7 @@ function createElements() {
 }
 
 function drawKey() {
+	console.log("drawKey");
 	isShowing = "key";
 	clearRendere();
 
@@ -487,13 +470,13 @@ function drawKey() {
 			"swing"
 		);
 	});
+	isShowing = "key";
 }
 
 function drawMap() {
+	// console.log("drawMap");
 	isShowing = "map";
 	clearRendere();
-
-	console.log($(".song"));
 	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
 	$(".song").each(function () {
 		let dotData = $(this).data();
@@ -524,6 +507,7 @@ function drawMap() {
 }
 
 function drawBarChart() {
+	console.log("drawBarChart");
 	isShowing = "bar";
 	clearRendere();
 
@@ -533,6 +517,9 @@ function drawBarChart() {
 
 		/* Klasse transform entfernen, damit die Animation richtig positioniert ist. */
 		// $(".song").removeClass("transform");
+		$(this).css({
+			"background-color": dotData.color,
+		});
 
 		$(this).animate(
 			{
@@ -561,7 +548,8 @@ function drawBarChart() {
 }
 
 function drawStart() {
-	isShowing = "start";
+	console.log("drawStart");
+
 	clearRendere();
 
 	$(".intro").css({
@@ -575,5 +563,47 @@ function clearRendere() {
 	$("#clickLabel2").hide();
 	$(".intro").css({
 		visibility: "hidden",
+	});
+}
+
+function menubar() {
+	info.hover(function () {
+		$(this).addClass("hoveredMenu");
+		info.click(function () {
+			drawStart();
+		});
+	});
+	info.mouseleave(function () {
+		$(this).removeClass("hoveredMenu");
+	});
+
+	energy.hover(function () {
+		$(this).addClass("hoveredMenu");
+		energy.click(function () {
+			drawMap();
+		});
+	});
+	energy.mouseleave(function () {
+		$(this).removeClass("hoveredMenu");
+	});
+
+	genres.hover(function () {
+		$(this).addClass("hoveredMenu");
+		genres.click(function () {
+			drawBarChart();
+		});
+	});
+	genres.mouseleave(function () {
+		$(this).removeClass("hoveredMenu");
+	});
+
+	keys.hover(function () {
+		$(this).addClass("hoveredMenu");
+		keys.click(function () {
+			drawKey();
+		});
+	});
+	keys.mouseleave(function () {
+		$(this).removeClass("hoveredMenu");
 	});
 }
