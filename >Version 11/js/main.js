@@ -3,6 +3,13 @@ let stageHeight;
 let stageWidth;
 let groupedByContinent;
 let toggleViewButton = $("#toggleViewButton");
+
+//Menübar
+let info = $("#info");
+let energy = $("#energy");
+let genres = $("#genres");
+let keys = $("#keys");
+
 let isShowing;
 
 let newGnere;
@@ -40,9 +47,20 @@ $(function () {
 
 	prepareData();
 	createElements();
-	drawMap();
+	// drawMap();
+	drawStart();
 
-	toggleViewButton.click(toggleView);
+	info.click(drawStart);
+	energy.click(drawMap);
+	genres.click(drawBarChart);
+	keys.click(drawKey);
+
+	info.hover(function () {
+		$(this).addClass("hoveredMenu");
+	});
+	info.mouseleave(function () {
+		$(this).removeClass("hoveredMenu");
+	});
 });
 
 function prepareData() {
@@ -444,6 +462,7 @@ function createElements() {
 
 function drawKey() {
 	isShowing = "key";
+	clearRendere();
 
 	$(".song").each(function () {
 		let dotData = $(this).data();
@@ -472,6 +491,7 @@ function drawKey() {
 
 function drawMap() {
 	isShowing = "map";
+	clearRendere();
 
 	console.log($(".song"));
 	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
@@ -505,6 +525,7 @@ function drawMap() {
 
 function drawBarChart() {
 	isShowing = "bar";
+	clearRendere();
 
 	/* Gleich siehe drawMap-Funktion */
 	$(".song").each(function () {
@@ -539,22 +560,20 @@ function drawBarChart() {
 	});
 }
 
-function toggleView() {
+function drawStart() {
+	isShowing = "start";
+	clearRendere();
+
+	$(".intro").css({
+		visibility: "visible",
+	});
+}
+
+function clearRendere() {
 	//Labels entfernen
 	$("#clickLabel1").hide();
 	$("#clickLabel2").hide();
-	//verschiedene Ansichten
-	switch (isShowing) {
-		case "map":
-			drawBarChart();
-			break;
-		case "bar":
-			drawKey();
-			break;
-		case "key":
-			drawMap();
-			break;
-		default:
-			break;
-	}
+	$(".intro").css({
+		visibility: "hidden",
+	});
 }

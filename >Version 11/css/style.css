@@ -19,20 +19,6 @@ body {
 	position: relative;
 }
 
-#toggleViewButton {
-	position: absolute;
-	bottom: 20px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 150px;
-	height: 40px;
-	line-height: 40px;
-	font-size: 20px;
-	text-align: center;
-	background-color: #777;
-	border-radius: 3%;
-}
-
 .song {
 	background-color: white;
 	position: absolute;
@@ -127,4 +113,61 @@ body {
 }
 #hoverLabel {
 	z-index: 1001;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+.intro {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	height: 80%;
+	align-items: center;
+	justify-content: center;
+	margin-top: 4%;
+}
+
+.intro h2 {
+	align-items: top;
+	font-size: 100px;
+	width: 50%;
+}
+
+.intro div {
+	font-size: 13px;
+	width: 50%;
+}
+
+.centerer {
+	display: flex;
+	width: 50%;
+}
+
+.menu {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	display: flex;
+	height: 10%;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	width: 100%;
+}
+
+.menu-item {
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 5px;
+	align-items: center;
+}
+
+.hoveredMenu {
+	border-bottom: 2px solid #ffffff;
+	margin-top: -10px;
 }
