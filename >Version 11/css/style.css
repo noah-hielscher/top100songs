@@ -45,7 +45,7 @@ body {
 	transform: translate(-30%, -30%);
 }
 .song-info {
-	line-height: 30px;
+	line-height: 18px;
 }
 
 #hoverLabel {
@@ -68,6 +68,7 @@ body {
 	position: absolute;
 	right: 50px;
 	margin: 20px;
+	margin-top: 50px;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 10px;
@@ -86,6 +87,7 @@ body {
 	right: 50px;
 	/* left: 30px; */
 	margin: 20px;
+	margin-top: 50px;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 10px;

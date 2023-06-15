@@ -524,6 +524,10 @@ function drawMap() {
 function drawBarChart() {
 	isShowing = "bar";
 	clearRendere();
+
+	//alle .song.clicked.transform entfernen
+	$(".song").removeClass("clicked transform");
+
 	$("#header").text("genre");
 	/* Gleich siehe drawMap-Funktion */
 	$(".song").each(function () {
