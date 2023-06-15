@@ -57,7 +57,7 @@ body {
 	padding-right: 15px;
 	display: none;
 	z-index: 1000;
-	font-size: 14px;
+	font-size: 13px;
 	text-align: center;
 	border-radius: "10px";
 	white-space: nowrap;
@@ -66,6 +66,7 @@ body {
 #clickLabel1 {
 	border-radius: 10px;
 	position: absolute;
+	right: 50px;
 	margin: 20px;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -74,7 +75,7 @@ body {
 	line-height: 50px;
 	display: none;
 	z-index: 1000;
-	font-size: 14px;
+	font-size: 13px;
 	text-align: left;
 	border-radius: "10px";
 	white-space: nowrap;
@@ -82,6 +83,7 @@ body {
 #clickLabel2 {
 	border-radius: 10px;
 	position: absolute;
+	right: 50px;
 	/* left: 30px; */
 	margin: 20px;
 	padding-left: 20px;
@@ -91,7 +93,7 @@ body {
 	line-height: 50px;
 	display: none;
 	z-index: 1000;
-	font-size: 14px;
+	font-size: 13px;
 	text-align: left;
 	border-radius: "10px";
 	white-space: nowrap;
@@ -106,7 +108,7 @@ body {
 	line-height: 50px;
 	display: none;
 	z-index: 1000;
-	font-size: 14px;
+	font-size: 13px;
 	text-align: left;
 	border-radius: "10px";
 	white-space: nowrap;
@@ -120,16 +122,17 @@ body {
 	height: 100%;
 }
 
+/* Startscreen */
 .intro {
 	visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
 	display: flex;
-	height: 80%;
+	height: 100%;
 	align-items: center;
 	justify-content: center;
-	margin-top: 4%;
+	/* margin-top: 4%; */
 	background-color: rgb(0, 0, 0);
 }
 
@@ -149,6 +152,7 @@ body {
 	width: 50%;
 }
 
+/* Menü */
 .menu {
 	position: absolute;
 	bottom: 20px;
@@ -169,6 +173,37 @@ body {
 }
 
 .hoveredMenu {
+	margin-top: -10px;
+	transition: margin-top 0.3s ease;
+}
+
+.clickedMenu {
 	border-bottom: 2px solid #ffffff;
 	margin-top: -10px;
+}
+
+/* Header */
+.header {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 50px;
+	display: flex;
+	height: 20%;
+	align-items: center;
+	justify-content: left;
+	background-color: rgb(0, 0, 0);
+}
+
+.header h2 {
+	align-items: top;
+	font-size: 50px;
+	width: 50%;
+}
+
+.header div {
+	font-size: 13px;
+	width: 50%;
+	margin-top: 15px;
 }

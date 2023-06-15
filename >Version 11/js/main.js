@@ -49,6 +49,8 @@ $(function () {
 	createElements();
 	// drawMap();
 	drawStart();
+	//info css clickedMenu
+	info.addClass("clickedMenu");
 
 	menubar.hover(menubar());
 });
@@ -71,11 +73,18 @@ function createElements() {
 	// Hilfsvariable: Map
 	const populationMax = gmynd.dataMax(songs, "popularity");
 
-	let dotWidth = 27;
-	let paddingRender = 10;
+	//Margin
+	let marginTop = 200;
+	let marginLeft = 50;
+	let marginRight = 50;
+	let marginBottom = 150;
+
+	//genres
+	let dotWidth = 21;
+	let paddingRender = 50;
 	let gapY = dotWidth;
 	let barX = 0;
-	let barY = paddingRender;
+	let barY = marginTop;
 	let maxDotLength = Math.floor((stageWidth - paddingRender * 2) / dotWidth);
 
 	//Dancebility Max
@@ -105,20 +114,38 @@ function createElements() {
 				100
 			);
 			const mapD = gmynd.circleRadius(area);
-			const mapX = gmynd.map(song.valence, valenceMax, 0, 0, stageWidth);
-			const mapY = gmynd.map(song.energy, 0, energyMax, stageHeight, 0);
+			const mapX = gmynd.map(
+				song.valence,
+				valenceMax,
+				0,
+				0 + marginLeft,
+				stageWidth - marginRight
+			);
+			const mapY = gmynd.map(
+				song.energy,
+				0,
+				energyMax,
+				stageHeight - marginBottom,
+				0 + marginTop
+			);
 
 			//Parameter Barchart - Ansicht 2
 
 			barX = indexX * dotWidth + paddingRender;
 
 			//Parameter Key - Ansicht 3
-			keyX = gmynd.map(song.key + song.mode / 2, 0, 12.5, 50, stageWidth);
+			keyX = gmynd.map(
+				song.key + song.mode / 2,
+				0,
+				12.5,
+				50,
+				stageWidth - marginRight
+			);
 			keyY = gmynd.map(
 				song.danceability,
 				danceabilityMax,
 				0,
-				stageHeight,
+				stageHeight - marginBottom,
 				0
 			);
 
@@ -189,7 +216,7 @@ function createElements() {
 						"Genre: " +
 						song.genre +
 						"<br>" +
-						"press to Open</p>";
+						"press to Play</p>";
 				} else {
 					if (isShowing === "bar") {
 						clickLabelInput1 =
@@ -205,7 +232,7 @@ function createElements() {
 							"Genre: " +
 							song.genre +
 							"<br>" +
-							"press to Open</p>";
+							"press to Play</p>";
 					} else {
 						clickLabelInput1 =
 							"<p class='song-info'>Artist: " +
@@ -226,7 +253,7 @@ function createElements() {
 							"Genre: " +
 							song.genre +
 							"<br>" +
-							"press to Open</p>";
+							"press to Play</p>";
 					}
 				}
 
@@ -303,7 +330,7 @@ function createElements() {
 				holdTimeout = setTimeout(() => {
 					clickLabel2.css({
 						backgroundColor: color,
-						left: labelWidth + 50,
+						right: labelWidth + 100,
 					});
 					clickLabel2.show();
 
@@ -327,7 +354,7 @@ function createElements() {
 							"Genre: " +
 							song.genre +
 							"<br>" +
-							"press to Open</p>";
+							"press to Play</p>";
 					} else {
 						if (isShowing === "bar") {
 							clickLabelInput2 =
@@ -343,7 +370,7 @@ function createElements() {
 								"Genre: " +
 								song.genre +
 								"<br>" +
-								"press to Open</p>";
+								"press to Play</p>";
 						} else {
 							clickLabelInput2 =
 								"<p class='song-info'>Artist: " +
@@ -364,7 +391,7 @@ function createElements() {
 								"Genre: " +
 								song.genre +
 								"<br>" +
-								"press to Open</p>";
+								"press to Play</p>";
 						}
 					}
 					clickLabel2.html(clickLabelInput2);
@@ -418,7 +445,6 @@ function createElements() {
 
 			dot.mouseout(() => {
 				/*  Dem gehoverten Element die Klasse "hover" entfernen. */
-				// dot.removeClass("hovered");
 				$(".song").removeClass("hovered");
 				$("#hoverLabel").text("");
 			});
@@ -432,21 +458,14 @@ function createElements() {
 			}
 		});
 
-		// Genre nächste Zeile
-		// barX = 0;
-		// indexX = 0;
-		// barY = barY + gapY;
 		colorIndex++;
 	}
-
-	// indexX++;
 }
 
 function drawKey() {
-	console.log("drawKey");
 	isShowing = "key";
 	clearRendere();
-
+	$("#header").text("key & danceability");
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
@@ -474,15 +493,12 @@ function drawKey() {
 }
 
 function drawMap() {
-	// console.log("drawMap");
 	isShowing = "map";
 	clearRendere();
+	$("#header").text("valence & energy");
 	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
 	$(".song").each(function () {
 		let dotData = $(this).data();
-
-		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
-		// $(".song").addClass("transform");
 
 		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
 		$(this).css({
@@ -495,9 +511,8 @@ function drawMap() {
 			{
 				height: dotData.mapH,
 				width: dotData.mapW,
-				// left: dotData.mapX,
-				// top: dotData.mapY,
-				/* Kreis: deshalb Border-Radius 50% */
+				left: dotData.mapX,
+				top: dotData.mapY,
 				"border-radius": "50%",
 			},
 			5000,
@@ -507,15 +522,13 @@ function drawMap() {
 }
 
 function drawBarChart() {
-	console.log("drawBarChart");
 	isShowing = "bar";
 	clearRendere();
-
+	$("#header").text("genre");
 	/* Gleich siehe drawMap-Funktion */
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
-		/* Klasse transform entfernen, damit die Animation richtig positioniert ist. */
 		// $(".song").removeClass("transform");
 		$(this).css({
 			"background-color": dotData.color,
@@ -531,29 +544,18 @@ function drawBarChart() {
 			5000,
 			"swing"
 		);
-
-		// let that = this
-		// setTimeout(function () {
-		// 	console.log("timeout");
-		// 	$(that).animate(
-		// 		{
-		// 			height: dotData.barH,
-		// 			width: dotData.barW,
-		// 		},
-		// 		5000,
-		// 		"swing"
-		// 	);
-		// }, 2500)
 	});
 }
 
 function drawStart() {
-	console.log("drawStart");
-
 	clearRendere();
 
 	$(".intro").css({
 		visibility: "visible",
+	});
+
+	$(".header").css({
+		visibility: "hidden",
 	});
 }
 
@@ -564,13 +566,18 @@ function clearRendere() {
 	$(".intro").css({
 		visibility: "hidden",
 	});
+	$(".header").css({
+		visibility: "visible",
+	});
 }
 
 function menubar() {
 	info.hover(function () {
 		$(this).addClass("hoveredMenu");
 		info.click(function () {
+			$(".clickedMenu").removeClass("clickedMenu");
 			drawStart();
+			$(this).addClass("clickedMenu");
 		});
 	});
 	info.mouseleave(function () {
@@ -580,7 +587,9 @@ function menubar() {
 	energy.hover(function () {
 		$(this).addClass("hoveredMenu");
 		energy.click(function () {
+			$(".clickedMenu").removeClass("clickedMenu");
 			drawMap();
+			$(this).addClass("clickedMenu");
 		});
 	});
 	energy.mouseleave(function () {
@@ -590,7 +599,9 @@ function menubar() {
 	genres.hover(function () {
 		$(this).addClass("hoveredMenu");
 		genres.click(function () {
+			$(".clickedMenu").removeClass("clickedMenu");
 			drawBarChart();
+			$(this).addClass("clickedMenu");
 		});
 	});
 	genres.mouseleave(function () {
@@ -600,7 +611,9 @@ function menubar() {
 	keys.hover(function () {
 		$(this).addClass("hoveredMenu");
 		keys.click(function () {
+			$(".clickedMenu").removeClass("clickedMenu");
 			drawKey();
+			$(this).addClass("clickedMenu");
 		});
 	});
 	keys.mouseleave(function () {
