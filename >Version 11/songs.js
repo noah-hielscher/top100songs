@@ -1917,7 +1917,7 @@ let songs = [
 		liveness: 0.174,
 		valence: 0.633,
 		tempo: 94.661,
-		genre: "set()",
+		genre: "rock",
 	},
 	{
 		artist: "Christina Aguilera",
@@ -4337,7 +4337,7 @@ let songs = [
 		liveness: 0.0924,
 		valence: 0.868,
 		tempo: 184.819,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Aaliyah",
@@ -5837,7 +5837,7 @@ let songs = [
 		liveness: 0.325,
 		valence: 0.502,
 		tempo: 144.188,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Default",
@@ -8577,7 +8577,7 @@ let songs = [
 		liveness: 0.117,
 		valence: 0.88,
 		tempo: 128.429,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Britney Spears",
@@ -9117,7 +9117,7 @@ let songs = [
 		liveness: 0.287,
 		valence: 0.802,
 		tempo: 131.012,
-		genre: "set()",
+		genre: "Dance/Electronic",
 	},
 	{
 		artist: "Kylie Minogue",
@@ -9637,7 +9637,7 @@ let songs = [
 		liveness: 0.0404,
 		valence: 0.575,
 		tempo: 68.507,
-		genre: "set()",
+		genre: "R&B",
 	},
 	{
 		artist: "Beyoncé",
@@ -10917,7 +10917,7 @@ let songs = [
 		liveness: 0.106,
 		valence: 0.316,
 		tempo: 77.984,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Bobby V.",
@@ -12917,7 +12917,7 @@ let songs = [
 		liveness: 0.0697,
 		valence: 0.806,
 		tempo: 129.016,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Mary J. Blige",
@@ -14217,7 +14217,7 @@ let songs = [
 		liveness: 0.146,
 		valence: 0.715,
 		tempo: 129.026,
-		genre: "set()",
+		genre: "pop, dance",
 	},
 	{
 		artist: "Alex Gaudino",
@@ -14597,7 +14597,7 @@ let songs = [
 		liveness: 0.0626,
 		valence: 0.724,
 		tempo: 127.894,
-		genre: "set()",
+		genre: "Dance/Electronic",
 	},
 	{
 		artist: "Linkin Park",
@@ -15877,7 +15877,7 @@ let songs = [
 		liveness: 0.184,
 		valence: 0.352,
 		tempo: 116.027,
-		genre: "set()",
+		genre: "pop, R&B",
 	},
 	{
 		artist: "Wyclef Jean",
@@ -15897,7 +15897,7 @@ let songs = [
 		liveness: 0.341,
 		valence: 0.529,
 		tempo: 92.515,
-		genre: "set()",
+		genre: "hip hop,rap",
 	},
 	{
 		artist: "Boys Like Girls",
@@ -18997,7 +18997,7 @@ let songs = [
 		liveness: 0.0797,
 		valence: 0.879,
 		tempo: 136.202,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "The Pussycat Dolls",
@@ -21157,7 +21157,7 @@ let songs = [
 		liveness: 0.238,
 		valence: 0.717,
 		tempo: 75.974,
-		genre: "set()",
+		genre: "hip hop, pop",
 	},
 	{
 		artist: "Ludacris",
@@ -25437,7 +25437,7 @@ let songs = [
 		liveness: 0.107,
 		valence: 0.674,
 		tempo: 129.054,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Flo Rida",
@@ -26417,7 +26417,7 @@ let songs = [
 		liveness: 0.103,
 		valence: 0.213,
 		tempo: 126.03,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Britney Spears",
@@ -28137,7 +28137,7 @@ let songs = [
 		liveness: 0.305,
 		valence: 0.925,
 		tempo: 144.033,
-		genre: "set()",
+		genre: "pop, rock",
 	},
 	{
 		artist: "Sia",
@@ -29097,7 +29097,7 @@ let songs = [
 		liveness: 0.0759,
 		valence: 0.728,
 		tempo: 114.016,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Ed Sheeran",
@@ -29757,7 +29757,7 @@ let songs = [
 		liveness: 0.0656,
 		valence: 0.735,
 		tempo: 104.99,
-		genre: "set()",
+		genre: "R&B",
 	},
 	{
 		artist: "Vance Joy",
@@ -32361,7 +32361,7 @@ let songs = [
 	},
 	{
 		artist: "Lil Wayne",
-		song: "Sucker for Pain (with Wiz Khalifa, Imagine Dragons, Logic & Ty Dolla $ign feat. X Ambassadors)",
+		song: "Sucker for Pain ",
 		duration_ms: 243490,
 		explicit: "True",
 		year: 2016,
@@ -33561,7 +33561,7 @@ let songs = [
 	},
 	{
 		artist: "P!nk",
-		song: 'Just Like Fire (From the Original Motion Picture "Alice Through The Looking Glass")',
+		song: "Just Like Fire ",
 		duration_ms: 215413,
 		explicit: "False",
 		year: 2016,
@@ -35477,7 +35477,7 @@ let songs = [
 		liveness: 0.391,
 		valence: 0.78,
 		tempo: 160.517,
-		genre: "set()",
+		genre: "hip hop",
 	},
 	{
 		artist: "Calvin Harris",
@@ -35661,7 +35661,7 @@ let songs = [
 	},
 	{
 		artist: "ZAYN",
-		song: 'I Don’t Wanna Live Forever (Fifty Shades Darker) - From "Fifty Shades Darker (Original Motion Picture Soundtrack)',
+		song: "I Don’t Wanna Live Forever (Fifty Shades Darker) ",
 		duration_ms: 245200,
 		explicit: "False",
 		year: 2016,
@@ -36837,7 +36837,7 @@ let songs = [
 		liveness: 0.191,
 		valence: 0.852,
 		tempo: 103.019,
-		genre: "set()",
+		genre: "hip hop",
 	},
 	{
 		artist: "Dennis Lloyd",
@@ -39537,7 +39537,7 @@ let songs = [
 		liveness: 0.0523,
 		valence: 0.387,
 		tempo: 125.011,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Dominic Fike",

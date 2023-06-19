@@ -1917,7 +1917,7 @@ let songs = [
 		liveness: 0.174,
 		valence: 0.633,
 		tempo: 94.661,
-		genre: "set()",
+		genre: "rock",
 	},
 	{
 		artist: "Christina Aguilera",
@@ -5837,7 +5837,7 @@ let songs = [
 		liveness: 0.325,
 		valence: 0.502,
 		tempo: 144.188,
-		genre: "set()",
+		genre: "pop",
 	},
 	{
 		artist: "Default",
@@ -29757,7 +29757,7 @@ let songs = [
 		liveness: 0.0656,
 		valence: 0.735,
 		tempo: 104.99,
-		genre: "set()",
+		genre: "R&B",
 	},
 	{
 		artist: "Vance Joy",
