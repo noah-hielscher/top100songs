@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<title>top 100 songs.</title>
+		<script src="lib/jquery-3.6.0.min.js"></script>
+		<script src="lib/gmynd.js"></script>
+		<script src="lib/chroma.min.js"></script>
+		<link rel="stylesheet" href="css/overlay.css" />
+		<link rel="stylesheet" href="css/labels.css" />
+		<link rel="stylesheet" href="css/graphic.css" />
+		<style>
+			body {
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="renderer">
+			<div id="clickLabel1"></div>
+			<div id="clickLabel2"></div>
+			<div id="resetLabel"></div>
+		</div>
+		<div class="intro">
+			<div class="centerer">
+				<h2 style="margin: -20px">top 100 songs.</h2>
+
+				<div>
+					<h3>
+						Sind die Top 100 Songs nur ein Spiegelbild des
+						Mainstreams und ignorieren sie talentierte Künstler
+						abseits des Rampenlichts?
+					</h3>
+					<br />
+					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+					diam nonumy eirmod tempor invidunt ut labore et dolore magna
+					aliquyam erat, sed diam voluptua. At vero eos et accusam et
+					justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+					sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+					ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+					nonumy eirmod tempor invidunt ut labore et dolore magna
+					aliquyam erat, sed diam voluptua.
+					<br />
+					<br />
+					Noah Hielscher - IG1 - Programmiertes Entwerfen II -
+					<a
+						href="https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019"
+						class="sources-link"
+						target="_blank"
+						>Sources</a
+					>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<div class="centerer">
+				<h2 id="header"></h2>
+				<div id="discription"></div>
+			</div>
+		</div>
+		<div id="menu" class="menu">
+			<div id="info" class="menu-item">info</div>
+			<div id="energy" class="menu-item">energy & valence</div>
+			<div id="genres" class="menu-item">genres</div>
+			<div id="keys" class="menu-item">key & dancebility</div>
+		</div>
+		<div id="hoverLabel"></div>
+
+		<script src="data/songs.js"></script>
+		<script src="js/drawGenre.js"></script>
+		<script src="js/drawMap.js"></script>
+		<script src="js/drawKeys.js"></script>
+		<script src="js/helper.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>

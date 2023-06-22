@@ -1,0 +1,107 @@
+html,
+body {
+	height: 100%;
+}
+
+/* Startscreen */
+.intro {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	/* margin-top: 4%; */
+	background-color: rgb(0, 0, 0);
+}
+
+.intro h2 {
+	font-family: "Poppins-Bold", sans-serif;
+	align-items: top;
+	font-size: 100px;
+	width: 50%;
+}
+
+.intro div {
+	font-family: "Poppins-light", sans-serif;
+	font-size: 13px;
+	width: 50%;
+}
+
+.centerer {
+	display: flex;
+	width: 50%;
+}
+
+/* Menü */
+.menu {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	display: flex;
+	height: 10%;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	width: 100%;
+}
+
+.menu-item {
+	font-family: "Poppins-light";
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 5px;
+	align-items: center;
+}
+
+.hoveredMenu {
+	margin-top: -10px;
+	transition: margin-top 0.3s ease;
+}
+
+.clickedMenu {
+	border-bottom: 1px solid #ffffff;
+	/* margin-top: -10px; */
+}
+
+/* Header */
+.header {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	margin-left: 50px;
+	display: flex;
+	height: 20%;
+	align-items: center;
+	justify-content: left;
+	background-color: rgb(0, 0, 0);
+}
+
+.header h2 {
+	font-family: "Poppins-Bold", sans-serif;
+
+	align-items: top;
+	font-size: 50px;
+	width: 40%;
+}
+
+.header div {
+	font-size: 13px;
+	width: 50%;
+	margin-top: 15px;
+}
+
+p {
+	font-family: "Poppins-Light", sans-serif;
+	font-size: 16px;
+	color: #ffffff;
+}
+
+.sources-link {
+	color: white;
+	text-decoration: underline;
+}

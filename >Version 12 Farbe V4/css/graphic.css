@@ -1,0 +1,62 @@
+/* Schriftart */
+@font-face {
+	font-family: "Poppins-Bold";
+	src: url("Typo/Poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+	font-family: "Poppins-light";
+	src: url("Typo/Poppins/Poppins-Light.ttf");
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background-color: rgb(39, 39, 39);
+	color: white;
+	font-family: "Fira Sans", sans-serif;
+	width: 100%;
+	height: 100vh;
+	/*  Mauszeiger  */
+	cursor: crosshair;
+}
+
+#renderer {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(0, 0, 0);
+	position: relative;
+}
+
+.song {
+	background-color: white;
+	position: absolute;
+	border-radius: 100%;
+}
+
+.song.clicked {
+	border-radius: 50%;
+	border: 2px solid #fefefe;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+.song.clicked.transform {
+	transform: translate(-30%, -30%);
+}
+
+.song.unClicked {
+	background-color: "" !important;
+}
+.song.hovered {
+	padding: 10px;
+
+	margin-bottom: 15px;
+	transform: translate(-30%, -30%);
+}
+.song-info {
+	line-height: 18px;
+}

@@ -1,0 +1,6 @@
+created by: Noah Hielscher
+semester: Interaction Design 2
+course: Programmed Design II
+University: Hochschule für Gestaltung Schwäbisch Gmünd
+
+Data: https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019

@@ -26,16 +26,16 @@ let bar;
 const colorGenres = [
 	"#47C6D8",
 	"#FFCD37",
-	"#B9DF20",
-	"#FF6254",
-	"#C070FE",
-	"#48F3E9",
-	"#FF7759",
 	"#B3A7FF",
 	"#FF71E6",
 	"#FFDBAC",
 	"#FEAF90",
 	"white",
+	"#B9DF20",
+	"#FF6254",
+	"#C070FE",
+	"#48F3E9",
+	"#FF7759",
 ];
 
 let clickedDot;
@@ -74,7 +74,7 @@ function createElements() {
 	const populationMax = gmynd.dataMax(songs, "popularity");
 
 	//Margin
-	let marginTop = 200;
+	let marginTop = 230;
 	let marginLeft = 50;
 	let marginRight = 50;
 	let marginBottom = 150;
@@ -93,11 +93,11 @@ function createElements() {
 	let valenceMax = gmynd.dataMax(songs, "valence");
 	//energie Max
 	let energyMax = gmynd.dataMax(songs, "energy");
+	//
 
 	let colorIndex = 0;
 	for (let genreName in newGnere) {
 		let currentGenre = newGnere[genreName];
-		console.log(currentGenre);
 
 		//Das jeweilige Genre wird durchgegangen, je nachdem wie lange das Genre.leght ist
 		currentGenre.forEach((song, j) => {
@@ -118,15 +118,15 @@ function createElements() {
 				song.valence,
 				valenceMax,
 				0,
-				0 + marginLeft,
-				stageWidth - marginRight
+				stageWidth - marginRight,
+				marginLeft
 			);
 			const mapY = gmynd.map(
 				song.energy,
 				0,
 				energyMax,
 				stageHeight - marginBottom,
-				0 + marginTop
+				marginTop
 			);
 
 			//Parameter Barchart - Ansicht 2
@@ -137,17 +137,18 @@ function createElements() {
 			keyX = gmynd.map(
 				song.key + song.mode / 2,
 				0,
-				12.5,
-				50,
-				stageWidth - marginRight
+				12,
+				marginLeft,
+				stageWidth - marginRight + 50
 			);
 			keyY = gmynd.map(
 				song.danceability,
-				danceabilityMax,
 				0,
+				danceabilityMax,
 				stageHeight - marginBottom,
-				0
+				marginTop
 			);
+			let keyHW = 5;
 
 			//Farbe der Dots
 			let color = colorGenres[colorIndex];
@@ -192,7 +193,8 @@ function createElements() {
 
 				//Clicklabel Hintergrundfarbe
 				clickLabel1.css({
-					backgroundColor: color,
+					borderBottom: "4px solid " + color,
+					// backgroundColor: color,
 				});
 
 				//je nach Ansciht unterschiedliche Informationen im Label
@@ -209,7 +211,7 @@ function createElements() {
 						"<br>" +
 						"Valence: " +
 						song.valence +
-						"<br>" +
+						" | " +
 						"Energy: " +
 						song.energy +
 						"<br>" +
@@ -246,7 +248,7 @@ function createElements() {
 							"<br>" +
 							"Key: " +
 							song.key +
-							"<br>" +
+							" | " +
 							"Dancebility: " +
 							song.danceability +
 							"<br>" +
@@ -282,13 +284,11 @@ function createElements() {
 
 					//Welche Eigenschaft hat der angeklickte Dot
 					clickedDot = song.newGenre;
-					console.log(clickedDot);
 
 					// Durch contitnete durcheterieren
 					$(".song").each(function () {
 						let thisGenre = $(this).data("genre");
 
-						console.log(thisGenre);
 						if (thisGenre == clickedDot) {
 							// $(this).addClass("song clicked");
 						} else {
@@ -314,7 +314,6 @@ function createElements() {
 						dot.addClass("song clicked transform");
 					}
 				}
-				// dot.addClass("song clicked");
 
 				//"song clicked" css bearbeiten
 				clickLabel1.show();
@@ -325,11 +324,11 @@ function createElements() {
 			dot.mousedown(() => {
 				//variable die Breite von Clciklabel2
 				let labelWidth = clickLabel1.width();
-				console.log(labelWidth);
 
 				holdTimeout = setTimeout(() => {
 					clickLabel2.css({
-						backgroundColor: color,
+						borderBottom: "4px solid " + color,
+						// backgroundColor: color,
 						right: labelWidth + 100,
 					});
 					clickLabel2.show();
@@ -347,7 +346,7 @@ function createElements() {
 							"<br>" +
 							"Valence: " +
 							song.valence +
-							"<br>" +
+							" | " +
 							"Energy: " +
 							song.energy +
 							"<br>" +
@@ -384,7 +383,7 @@ function createElements() {
 								"<br>" +
 								"Key: " +
 								song.key +
-								"<br>" +
+								" | " +
 								"Dancebility: " +
 								song.danceability +
 								"<br>" +
@@ -395,7 +394,6 @@ function createElements() {
 						}
 					}
 					clickLabel2.html(clickLabelInput2);
-					console.log("Hold event");
 				}, 1000); // Ändern Sie die Zeit (in Millisekunden) nach Bedarf
 			});
 
@@ -410,25 +408,52 @@ function createElements() {
 				hoverLabel.text(song.song);
 
 				let labely = $(this).data();
-				console.log(labely);
 
 				let dotData = dot.data();
-
 				let hooverx;
 
+				//hoverLabel breite
+				let hoverLabelWidth = hoverLabel.width();
+				let hoverLabelPositionMax = dotData.mapX + hoverLabelWidth;
+
 				if (isShowing === "map") {
-					console.log("map");
-					labely = dotData.mapY - 13;
-					hooverx = dotData.mapX + 20;
+					//hoverLabel position
+					if (hoverLabelPositionMax > stageWidth - marginRight - 50) {
+						labely = dotData.mapY - 11;
+						hooverx = dotData.mapX - hoverLabelWidth - 50;
+					} else {
+						labely = dotData.mapY - 13;
+						hooverx = dotData.mapX + 20;
+					}
 					//Dot hover effect
 					dot.addClass("song hovered");
 				} else {
 					if (isShowing === "bar") {
-						labely = dotData.barY - 2;
-						hooverx = dotData.barX + 30;
+						//hoverLabel position
+						hoverLabelPositionMax = dotData.barX + hoverLabelWidth;
+						if (
+							hoverLabelPositionMax >
+							stageWidth - marginRight - 50
+						) {
+							labely = dotData.barY - 5;
+							hooverx = dotData.barX - hoverLabelWidth - 35;
+						} else {
+							labely = dotData.barY - 5;
+							hooverx = dotData.barX + 30;
+						}
 					} else {
-						labely = dotData.keyY - 13;
-						hooverx = dotData.keyX + 20;
+						//hoverLabel position
+						hoverLabelPositionMax = dotData.keyX + hoverLabelWidth;
+						if (
+							hoverLabelPositionMax >
+							stageWidth - marginRight - 50
+						) {
+							labely = dotData.keyY - 12;
+							hooverx = dotData.keyX - hoverLabelWidth - 45;
+						} else {
+							labely = dotData.keyY - 13;
+							hooverx = dotData.keyX + 20;
+						}
 						//Dot hover effect
 						dot.addClass("song hovered");
 					}
@@ -460,167 +485,4 @@ function createElements() {
 
 		colorIndex++;
 	}
-}
-
-function drawKey() {
-	isShowing = "key";
-	clearRendere();
-	$("#header").text("key & danceability");
-	$(".song").each(function () {
-		let dotData = $(this).data();
-
-		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
-		$(".song").addClass("transform");
-
-		$(this).css({
-			"background-color": dotData.color,
-		});
-
-		$(this).animate(
-			{
-				height: dotData.mapH,
-				width: dotData.mapW,
-				left: dotData.keyX,
-				top: dotData.keyY,
-				/* Kreis: deshalb Border-Radius 50% */
-				"border-radius": "50%",
-			},
-			5000,
-			"swing"
-		);
-	});
-	isShowing = "key";
-}
-
-function drawMap() {
-	isShowing = "map";
-	clearRendere();
-	$("#header").text("valence & energy");
-	/* jQuery-Objekte (Songs) iterieren (each-Schleife) */
-	$(".song").each(function () {
-		let dotData = $(this).data();
-
-		/* Hintergrundfarbe als Style setzen. Kann nicht animiert werden. */
-		$(this).css({
-			"background-color": dotData.color,
-		});
-
-		/* Mit Animation:
-		Parameter mit den aktuellen werden zu den neuen Werte anmieren. */
-		$(this).animate(
-			{
-				height: dotData.mapH,
-				width: dotData.mapW,
-				left: dotData.mapX,
-				top: dotData.mapY,
-				"border-radius": "50%",
-			},
-			5000,
-			"swing"
-		);
-	});
-}
-
-function drawBarChart() {
-	isShowing = "bar";
-	clearRendere();
-
-	//alle .song.clicked.transform entfernen
-	$(".song").removeClass("clicked transform");
-
-	$("#header").text("genre");
-	/* Gleich siehe drawMap-Funktion */
-	$(".song").each(function () {
-		let dotData = $(this).data();
-
-		// $(".song").removeClass("transform");
-		$(this).css({
-			"background-color": dotData.color,
-		});
-
-		$(this).animate(
-			{
-				left: dotData.barX,
-				top: dotData.barY,
-				height: dotData.barH,
-				width: dotData.barW,
-			},
-			5000,
-			"swing"
-		);
-	});
-}
-
-function drawStart() {
-	clearRendere();
-
-	$(".intro").css({
-		visibility: "visible",
-	});
-
-	$(".header").css({
-		visibility: "hidden",
-	});
-}
-
-function clearRendere() {
-	//Labels entfernen
-	$("#clickLabel1").hide();
-	$("#clickLabel2").hide();
-	$(".intro").css({
-		visibility: "hidden",
-	});
-	$(".header").css({
-		visibility: "visible",
-	});
-}
-
-function menubar() {
-	info.hover(function () {
-		$(this).addClass("hoveredMenu");
-		info.click(function () {
-			$(".clickedMenu").removeClass("clickedMenu");
-			drawStart();
-			$(this).addClass("clickedMenu");
-		});
-	});
-	info.mouseleave(function () {
-		$(this).removeClass("hoveredMenu");
-	});
-
-	energy.hover(function () {
-		$(this).addClass("hoveredMenu");
-		energy.click(function () {
-			$(".clickedMenu").removeClass("clickedMenu");
-			drawMap();
-			$(this).addClass("clickedMenu");
-		});
-	});
-	energy.mouseleave(function () {
-		$(this).removeClass("hoveredMenu");
-	});
-
-	genres.hover(function () {
-		$(this).addClass("hoveredMenu");
-		genres.click(function () {
-			$(".clickedMenu").removeClass("clickedMenu");
-			drawBarChart();
-			$(this).addClass("clickedMenu");
-		});
-	});
-	genres.mouseleave(function () {
-		$(this).removeClass("hoveredMenu");
-	});
-
-	keys.hover(function () {
-		$(this).addClass("hoveredMenu");
-		keys.click(function () {
-			$(".clickedMenu").removeClass("clickedMenu");
-			drawKey();
-			$(this).addClass("clickedMenu");
-		});
-	});
-	keys.mouseleave(function () {
-		$(this).removeClass("hoveredMenu");
-	});
 }
