@@ -1,14 +1,3 @@
-/* Schriftart */
-@font-face {
-	font-family: "Poppins-Bold";
-	src: url("Typo/Poppins/Poppins-Bold.ttf");
-}
-
-@font-face {
-	font-family: "Poppins-light";
-	src: url("Typo/Poppins/Poppins-Light.ttf");
-}
-
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -18,7 +7,6 @@
 body {
 	background-color: rgb(39, 39, 39);
 	color: white;
-	font-family: "Fira Sans", sans-serif;
 	width: 100%;
 	height: 100vh;
 	/*  Mauszeiger  */

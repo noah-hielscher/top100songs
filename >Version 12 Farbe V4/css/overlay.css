@@ -3,10 +3,17 @@ body {
 	height: 100%;
 }
 
+/* Schriftart */
+@font-face {
+	font-family: "Poppins";
+	src: url("../Typo/Poppins-Bold.ttf") format("truetype");
+}
+
 /* Startscreen */
 .intro {
 	visibility: hidden;
 	position: absolute;
+	font-family: "Poppins-Bold", sans-serif;
 	top: 0;
 	left: 0;
 	display: flex;
@@ -18,14 +25,12 @@ body {
 }
 
 .intro h2 {
-	font-family: "Poppins-Bold", sans-serif;
 	align-items: top;
 	font-size: 100px;
 	width: 50%;
 }
 
 .intro div {
-	font-family: "Poppins-light", sans-serif;
 	font-size: 13px;
 	width: 50%;
 }
@@ -49,7 +54,6 @@ body {
 }
 
 .menu-item {
-	font-family: "Poppins-light";
 	padding-left: 40px;
 	padding-right: 40px;
 	padding-bottom: 5px;
@@ -82,11 +86,12 @@ body {
 }
 
 .header h2 {
-	font-family: "Poppins-Bold", sans-serif;
-
 	align-items: top;
+	font-family: "Poppins-Bold", Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
 	font-size: 50px;
 	width: 40%;
+	color: #865050;
 }
 
 .header div {
@@ -96,7 +101,6 @@ body {
 }
 
 p {
-	font-family: "Poppins-Light", sans-serif;
 	font-size: 16px;
 	color: #ffffff;
 }

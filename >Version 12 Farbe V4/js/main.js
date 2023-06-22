@@ -24,18 +24,17 @@ let bar;
 
 //Farbe
 const colorGenres = [
-	"#47C6D8",
-	"#FFCD37",
+	"#47B5D8",
+	"#8FD87D",
+	"#FAB16D",
 	"#B3A7FF",
-	"#FF71E6",
-	"#FFDBAC",
-	"#FEAF90",
-	"white",
-	"#B9DF20",
-	"#FF6254",
-	"#C070FE",
-	"#48F3E9",
-	"#FF7759",
+	"#FFE7BF",
+	"#FF8DB4",
+	"#E6F89E",
+	"#4589F0",
+	"#71BBF0",
+	"#95FFD5",
+	"#DDB7FF",
 ];
 
 let clickedDot;
