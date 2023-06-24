@@ -1,0 +1,111 @@
+html,
+body {
+	height: 100%;
+}
+
+/* Schriftart */
+@font-face {
+	font-family: "Poppins";
+	src: url("../Typo/Poppins-Bold.ttf") format("truetype");
+}
+
+/* Startscreen */
+.intro {
+	visibility: hidden;
+	position: absolute;
+	font-family: "Poppins-Bold", sans-serif;
+	top: 0;
+	left: 0;
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	/* margin-top: 4%; */
+	background-color: rgb(0, 0, 0);
+}
+
+.intro h2 {
+	align-items: top;
+	font-size: 100px;
+	width: 50%;
+}
+
+.intro div {
+	font-size: 13px;
+	width: 50%;
+}
+
+.centerer {
+	display: flex;
+	width: 50%;
+}
+
+/* Menü */
+.menu {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	display: flex;
+	height: 10%;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	width: 100%;
+}
+
+.menu-item {
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 5px;
+	align-items: center;
+}
+
+.hoveredMenu {
+	margin-top: -10px;
+	transition: margin-top 0.3s ease;
+}
+
+.clickedMenu {
+	border-bottom: 1px solid #ffffff;
+	/* margin-top: -10px; */
+}
+
+/* Header */
+.header {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	margin-left: 50px;
+	display: flex;
+	height: 20%;
+	align-items: center;
+	justify-content: left;
+	background-color: rgb(0, 0, 0);
+}
+
+.header h2 {
+	align-items: top;
+	font-family: "Poppins-Bold", Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
+	font-size: 50px;
+	width: 40%;
+	color: #865050;
+}
+
+.header div {
+	font-size: 13px;
+	width: 50%;
+	margin-top: 15px;
+}
+
+p {
+	font-size: 16px;
+	color: #ffffff;
+}
+
+.sources-link {
+	color: white;
+	text-decoration: underline;
+}
