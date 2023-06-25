@@ -3,17 +3,10 @@ body {
 	height: 100%;
 }
 
-/* Schriftart */
-@font-face {
-	font-family: "Poppins";
-	src: url("../Typo/Poppins-Bold.ttf") format("truetype");
-}
-
 /* Startscreen */
 .intro {
 	visibility: hidden;
 	position: absolute;
-	font-family: "Poppins-Bold", sans-serif;
 	top: 0;
 	left: 0;
 	display: flex;
@@ -21,20 +14,34 @@ body {
 	align-items: center;
 	justify-content: center;
 	background-color: rgb(0, 0, 0);
+	font-family: "poppins-light";
+	color: #d1d1d1;
 }
 
 .intro h2 {
 	align-self: top;
+	font-family: "poppins-bold";
+	line-height: 120%;
 	font-size: 4.8vw;
+	width: 48%;
+	margin: 0 auto;
+	color: #ffffff;
+}
+.intro h3 {
+	font-family: "poppins-bold";
+	line-height: 120%;
+	color: #ffffff;
+}
+
+.intro div {
+	font-size: 0.8vw;
 	width: 48%;
 	margin: 0 auto;
 }
 
-.intro div {
-	align-self: center;
-	font-size: 0.8vw;
-	width: 48%;
-	margin: 0 auto;
+.sources-link {
+	color: #d1d1d1;
+	text-decoration: underline;
 }
 
 .centerer {
@@ -53,6 +60,8 @@ body {
 	justify-content: center;
 	display: flex;
 	width: 100%;
+	font-family: "poppins-light";
+	color: #d1d1d1;
 }
 
 .menu-item {
@@ -89,25 +98,18 @@ body {
 
 .header h2 {
 	align-items: top;
-	font-family: "Poppins-Bold", Georgia, "Times New Roman", Times, serif;
 	font-weight: bold;
+	font-family: "poppins-bold";
+	line-height: 120%;
 	font-size: 50px;
 	margin-right: 50px;
-	color: #865050;
-}
-
-.header div {
-	font-size: 13px;
-	width: 50%;
-	margin-top: 15px;
-}
-
-p {
-	font-size: 16px;
 	color: #ffffff;
 }
 
-.sources-link {
-	color: white;
-	text-decoration: underline;
+.header div {
+	font-family: "poppins-light";
+	color: #d1d1d1;
+	font-size: 12px;
+	width: 50%;
+	margin-top: 15px;
 }

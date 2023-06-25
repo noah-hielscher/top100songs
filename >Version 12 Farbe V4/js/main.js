@@ -37,6 +37,8 @@ const colorGenres = [
 	"#DDB7FF",
 ];
 
+let searchQuery;
+
 let clickedDot;
 
 $(function () {
@@ -190,6 +192,8 @@ function createElements() {
 			dot.click(() => {
 				$(".song").removeClass("clicked");
 
+				searchQuery = song.artist + " " + song.song;
+
 				//Clicklabel Hintergrundfarbe
 				clickLabel1.css({
 					borderBottom: "4px solid " + color,
@@ -208,12 +212,12 @@ function createElements() {
 						"Year: " +
 						song.year +
 						"<br>" +
-						"Valence: " +
+						"<strong> Valence: " +
 						song.valence +
 						" | " +
 						"Energy: " +
 						song.energy +
-						"<br>" +
+						"</strong><br>" +
 						"Genre: " +
 						song.genre +
 						"<br>" +
@@ -230,9 +234,9 @@ function createElements() {
 							"Year: " +
 							song.year +
 							"<br>" +
-							"Genre: " +
+							"<strong>Genre: " +
 							song.genre +
-							"<br>" +
+							"</strong><br>" +
 							"press to Play</p>";
 					} else {
 						clickLabelInput1 =
@@ -245,12 +249,12 @@ function createElements() {
 							"Year: " +
 							song.year +
 							"<br>" +
-							"Key: " +
+							"<strong>Key: " +
 							song.key +
 							" | " +
 							"Dancebility: " +
 							song.danceability +
-							"<br>" +
+							"</strong><br>" +
 							"Genre: " +
 							song.genre +
 							"<br>" +
@@ -297,7 +301,7 @@ function createElements() {
 				});
 
 				function openSong() {
-					searchQuery = song.artist + " " + song.song;
+					// searchQuery = song.artist + " " + song.song;
 					searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
 						searchQuery
 					)}`;
@@ -343,12 +347,12 @@ function createElements() {
 							"Year: " +
 							song.year +
 							"<br>" +
-							"Valence: " +
+							"<strong> Valence: " +
 							song.valence +
 							" | " +
 							"Energy: " +
 							song.energy +
-							"<br>" +
+							"</strong><br>" +
 							"Genre: " +
 							song.genre +
 							"<br>" +
@@ -365,12 +369,12 @@ function createElements() {
 								"Year: " +
 								song.year +
 								"<br>" +
-								"Genre: " +
+								"<strong>Genre: " +
 								song.genre +
-								"<br>" +
+								"</strong><br>" +
 								"press to Play</p>";
 						} else {
-							clickLabelInput2 =
+							clickLabelInput1 =
 								"<p class='song-info'>Artist: " +
 								song.artist +
 								"<br>" +
@@ -380,12 +384,12 @@ function createElements() {
 								"Year: " +
 								song.year +
 								"<br>" +
-								"Key: " +
+								"<strong>Key: " +
 								song.key +
 								" | " +
 								"Dancebility: " +
 								song.danceability +
-								"<br>" +
+								"</strong><br>" +
 								"Genre: " +
 								song.genre +
 								"<br>" +
