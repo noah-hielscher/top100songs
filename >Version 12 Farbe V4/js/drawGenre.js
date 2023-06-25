@@ -4,10 +4,6 @@ function drawBarChart() {
 
 	//alle .song.clicked.transform entfernen
 	$(".song").removeClass("clicked transform");
-	let header = $(".header h2");
-	header.css({
-		marginRight: -100,
-	});
 
 	$("#header").text("genre");
 	$("#discription").html(

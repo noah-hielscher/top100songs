@@ -20,19 +20,21 @@ body {
 	height: 100%;
 	align-items: center;
 	justify-content: center;
-	/* margin-top: 4%; */
 	background-color: rgb(0, 0, 0);
 }
 
 .intro h2 {
-	align-items: top;
-	font-size: 100px;
-	width: 50%;
+	align-self: top;
+	font-size: 4.8vw;
+	width: 48%;
+	margin: 0 auto;
 }
 
 .intro div {
-	font-size: 13px;
-	width: 50%;
+	align-self: center;
+	font-size: 0.8vw;
+	width: 48%;
+	margin: 0 auto;
 }
 
 .centerer {
@@ -90,7 +92,7 @@ body {
 	font-family: "Poppins-Bold", Georgia, "Times New Roman", Times, serif;
 	font-weight: bold;
 	font-size: 50px;
-	width: 40%;
+	margin-right: 50px;
 	color: #865050;
 }
 

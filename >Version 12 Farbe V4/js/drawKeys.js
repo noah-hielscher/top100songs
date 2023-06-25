@@ -1,7 +1,7 @@
 function drawKey() {
 	isShowing = "key";
 	clearRendere();
-	$("#header").text("key & danceability");
+	$("#header").html("key & <br> danceability");
 
 	$("#discription").html(
 		"<strong>Are there any keys that are particularly danceable?</strong> The graphic displays the distribution of songs based on their key and the intensity of danceability. The key indicates the tonal system in which a song is written. Danceability refers to the suitability of a music track for dancing, including tempo, rhythm stability, beat strength, and overall regularity."

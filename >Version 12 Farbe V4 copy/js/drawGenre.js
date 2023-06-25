@@ -1,4 +1,30 @@
-function drawBarChart() {
+//GSAP (TweenLite) top/left/width/height
+var tests = {
+	gsap: {
+		milliseconds: false,
+		wrapDot: function (dot) {
+			return dot; //kein Wrapper erforderlich
+		},
+		tween: function (dot, top, left, duration) {
+			TweenLite.to(dot, duration, {
+				css: {
+					left: left,
+					top: top,
+					width: 32,
+					height: 32,
+				},
+				ease: Cubic.easeIn,
+				overwrite: "none",
+			});
+		},
+		stop: function (dot) {
+			TweenLite.killTweensOf(dot);
+		},
+		nativeSize: 10,
+	},
+};
+
+function drawBarChart(duration) {
 	isShowing = "bar";
 	clearRendere();
 
@@ -25,30 +51,6 @@ function drawBarChart() {
 		});
 
 		// GSAP-Tween verwenden, um Animation durchzuführen
-		tests.gsap.tween(this, dotData.barY, dotData.barX);
+		tests.gsap.tween(this, dotData.barY, dotData.barX, duration);
 	});
 }
-
-//GSAP (TweenLite) top/left/width/height
-tests.gsap = {
-	milliseconds: false,
-	wrapDot: function (dot) {
-		return dot; //kein Wrapper erforderlich
-	},
-	tween: function (dot, top, left) {
-		TweenLite.to(dot, duration, {
-			css: {
-				left: left,
-				top: top,
-				width: 32,
-				height: 32,
-			},
-			ease: Cubic.easeIn,
-			overwrite: "none",
-		});
-	},
-	stop: function (dot) {
-		TweenLite.killTweensOf(dot);
-	},
-	nativeSize: 10,
-};
