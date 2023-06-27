@@ -2,8 +2,8 @@ function drawBarChart() {
 	isShowing = "bar";
 	clearRendere();
 
-	// Alle .song.clicked.transform entfernen
-	$(".song").removeClass("clicked transform");
+	// damit auch der ausgewählte Dot mittig in der Grafik sitzt
+	$(".song").removeClass("transform");
 
 	$("#header").text("genre");
 	$("#discription").html(
@@ -25,7 +25,7 @@ function drawBarChart() {
 			top: dotData.barY,
 			height: dotData.barH,
 			width: dotData.barW,
-			ease: "easeOutQuad", // Easing-Funktion (optional)
+			ease: "swing",
 		});
 	});
 }

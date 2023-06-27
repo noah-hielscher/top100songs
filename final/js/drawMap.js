@@ -20,11 +20,7 @@ function drawMap() {
 			left: dotData.mapX,
 			top: dotData.mapY,
 			"border-radius": "50%",
-			ease: "swing", // Easing-Funktion (optional)
-			onComplete: function () {
-				// Callback-Funktion (optional)
-				console.log("Animation abgeschlossen!");
-			},
+			ease: "swing",
 		});
 	});
 }

@@ -23,11 +23,7 @@ function drawKey() {
 			left: dotData.keyX,
 			top: dotData.keyY,
 			"border-radius": "50%",
-			ease: "swing", // Easing-Funktion (optional)
-			onComplete: function () {
-				// Callback-Funktion (optional)
-				console.log("Animation abgeschlossen!");
-			},
+			ease: "swing",
 		});
 	});
 

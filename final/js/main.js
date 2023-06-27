@@ -48,7 +48,7 @@ $(function () {
 
 	prepareData();
 	createElements();
-	// drawMap();
+
 	drawStart();
 	//info css clickedMenu
 	info.addClass("clickedMenu");
@@ -146,7 +146,8 @@ function createElements() {
 				song.danceability,
 				0,
 				danceabilityMax,
-				stageHeight - marginBottom,
+				//plsu 100 außnahmsweise, da dancebility zu gering ist vom Wert
+				stageHeight - marginBottom + 100,
 				marginTop
 			);
 			let keyHW = 5;
@@ -374,7 +375,7 @@ function createElements() {
 								"</strong><br>" +
 								"press to Play</p>";
 						} else {
-							clickLabelInput1 =
+							clickLabelInput2 =
 								"<p class='song-info'>Artist: " +
 								song.artist +
 								"<br>" +
