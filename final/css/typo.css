@@ -7,3 +7,8 @@
 	font-family: "poppins-bold";
 	src: url("../Typo/Poppins-Bold.ttf") format("truetype");
 }
+
+@font-face {
+	font-family: "poppins-medium";
+	src: url("../Typo/Poppins-Medium.ttf") format("truetype");
+}

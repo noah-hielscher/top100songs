@@ -13,6 +13,7 @@ function drawStart() {
 function clearRendere() {
 	//Labels entfernen
 	$("#clickLabel1").hide();
+
 	$("#clickLabel2").hide();
 	$(".intro").css({
 		visibility: "hidden",

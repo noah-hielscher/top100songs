@@ -7,7 +7,7 @@
 	padding-right: 15px;
 	display: none;
 	z-index: 1000;
-	font-family: "poppins-bold";
+	font-family: "poppins-medium";
 	font-size: 13px;
 	text-align: center;
 	border-radius: "10px";
@@ -34,6 +34,7 @@
 	white-space: nowrap;
 	color: #d1d1d1;
 }
+
 #clickLabel2 {
 	/* border-radius: 10px; */
 	position: absolute;
@@ -66,7 +67,7 @@
 	line-height: 50px;
 	display: none;
 	z-index: 1000;
-	font-family: "poppins-bold";
+	font-family: "poppins-medium";
 	font-size: 13px;
 	text-align: left;
 	border-radius: "10px";

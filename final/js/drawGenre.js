@@ -3,7 +3,7 @@ function drawBarChart() {
 	clearRendere();
 
 	// damit auch der ausgewählte Dot mittig in der Grafik sitzt
-	$(".song").removeClass("transform");
+	// $(".song").removeClass("transform");
 
 	$("#header").text("genre");
 	$("#discription").html(
@@ -20,12 +20,25 @@ function drawBarChart() {
 			"background-color": dotData.color,
 		});
 
-		TweenLite.to($(this), 5, {
-			left: dotData.barX,
-			top: dotData.barY,
-			height: dotData.barH,
-			width: dotData.barW,
-			ease: "swing",
-		});
+		if ($(this).hasClass("clicked")) {
+			TweenLite.to($(this), 5, {
+				left: dotData.barX + 6.3,
+				top: dotData.barY + 6.3,
+				height: dotData.barH,
+				width: dotData.barW,
+				ease: "swing",
+			});
+
+			clickLabel1.html(clickLabelInput1);
+			clickLabel1.show();
+		} else {
+			TweenLite.to($(this), 5, {
+				left: dotData.barX,
+				top: dotData.barY,
+				height: dotData.barH,
+				width: dotData.barW,
+				ease: "swing",
+			});
+		}
 	});
 }

@@ -119,8 +119,8 @@ function createElements() {
 				song.valence,
 				valenceMax,
 				0,
-				stageWidth - marginRight,
-				marginLeft
+				stageWidth - marginRight - 18,
+				marginLeft - 45
 			);
 			const mapY = gmynd.map(
 				song.energy,
@@ -139,8 +139,8 @@ function createElements() {
 				song.key + song.mode / 2,
 				0,
 				12,
-				marginLeft,
-				stageWidth - marginRight + 50
+				marginLeft + 10,
+				stageWidth - marginRight + 40
 			);
 			keyY = gmynd.map(
 				song.danceability,
@@ -200,6 +200,8 @@ function createElements() {
 					borderBottom: "4px solid " + color,
 					// backgroundColor: color,
 				});
+
+				//css von aktuellen dot
 
 				//je nach Ansciht unterschiedliche Informationen im Label
 				if (isShowing === "map") {
@@ -274,6 +276,7 @@ function createElements() {
 				dot.dblclick(() => {
 					//Bei Doppelclick Farbe entfernen
 					$(".song").removeClass("clicked");
+					resetLabel.show();
 					//Reset Label
 					resetLabel.text("<- Reset View" + " " + song.newGenre);
 					resetLabel.css({
@@ -321,7 +324,6 @@ function createElements() {
 
 				//"song clicked" css bearbeiten
 				clickLabel1.show();
-				resetLabel.show();
 			});
 
 			//Hold Label

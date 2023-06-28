@@ -11,7 +11,7 @@ function drawKey() {
 		let dotData = $(this).data();
 
 		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
-		$(".song").addClass("transform");
+		// $(".song").addClass("transform");
 
 		$(this).css({
 			"background-color": dotData.color,
