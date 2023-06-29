@@ -28,13 +28,13 @@ const colorGenres = [
 	"#8FD87D",
 	"#FAB16D",
 	"#B3A7FF",
-	"#FFE7BF",
+	"#F5F19D",
 	"#FF8DB4",
 	"#E6F89E",
-	"#4589F0",
+	"#7CADF5",
 	"#71BBF0",
 	"#95FFD5",
-	"#DDB7FF",
+	"#A7BAF2",
 ];
 
 let searchQuery;
@@ -181,6 +181,16 @@ function createElements() {
 				//Key
 				keyX: keyX,
 				keyY: keyY,
+				// other information
+				artist: song.artist,
+				song: song.song,
+				danceability: song.danceability,
+				energy: song.energy,
+				key: song.key,
+				mode: song.mode,
+				valence: song.valence,
+				year: song.year,
+				genre: song.genre,
 			});
 
 			stage.append(dot);
@@ -193,15 +203,15 @@ function createElements() {
 			dot.click(() => {
 				$(".song").removeClass("clicked");
 
+				//funktions namnes Transform
+
 				searchQuery = song.artist + " " + song.song;
 
 				//Clicklabel Hintergrundfarbe
 				clickLabel1.css({
-					borderBottom: "4px solid " + color,
+					borderTop: "2px solid " + color,
 					// backgroundColor: color,
 				});
-
-				//css von aktuellen dot
 
 				//je nach Ansciht unterschiedliche Informationen im Label
 				if (isShowing === "map") {
@@ -223,6 +233,9 @@ function createElements() {
 						"</strong><br>" +
 						"Genre: " +
 						song.genre +
+						" | " +
+						"Danceability: " +
+						song.danceability +
 						"<br>" +
 						"press to Play</p>";
 				} else {
@@ -333,7 +346,7 @@ function createElements() {
 
 				holdTimeout = setTimeout(() => {
 					clickLabel2.css({
-						borderBottom: "4px solid " + color,
+						borderTop: "2px solid " + color,
 						// backgroundColor: color,
 						right: labelWidth + 100,
 					});
@@ -358,6 +371,9 @@ function createElements() {
 							"</strong><br>" +
 							"Genre: " +
 							song.genre +
+							" | " +
+							"Danceability: " +
+							song.danceability +
 							"<br>" +
 							"press to Play</p>";
 					} else {

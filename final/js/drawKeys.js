@@ -17,6 +17,32 @@ function drawKey() {
 			"background-color": dotData.color,
 		});
 
+		if ($(this).hasClass("clicked")) {
+			let clickLabelInputkey =
+				"<p class='song-info'>Artist: " +
+				dotData.artist +
+				"<br>" +
+				"Title: " +
+				dotData.song +
+				"<br>" +
+				"Year: " +
+				dotData.year +
+				"<br>" +
+				"<strong>Key: " +
+				dotData.key +
+				" | " +
+				"Dancebility: " +
+				dotData.danceability +
+				"</strong><br>" +
+				"Genre: " +
+				dotData.genre +
+				"<br>" +
+				"press to Play</p>";
+
+			clickLabel1.html(clickLabelInputkey);
+			clickLabel1.show();
+		}
+
 		TweenLite.to($(this), 5, {
 			height: 5,
 			width: 5,

@@ -62,7 +62,7 @@ body {
 	width: 100%;
 	font-family: "poppins-light";
 	color: #d1d1d1;
-	animation: slideInAnimation 1.5s ease-out 0.5s forwards; /* Hinzugefügtes "3s" für die Verzögerung */
+	animation: slideInAnimation 1.5s ease-out 0.5s forwards;
 }
 
 @keyframes slideInAnimation {

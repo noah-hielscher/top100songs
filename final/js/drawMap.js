@@ -14,6 +14,58 @@ function drawMap() {
 			"background-color": dotData.color,
 		});
 
+		// "<p class='song-info'> Artist: " +
+		// song.artist +
+		// "<br>" +
+		// "Title: " +
+		// song.song +
+		// "<br>" +
+		// "Year: " +
+		// song.year +
+		// "<br>" +
+		// "<strong> Valence: " +
+		// song.valence +
+		// " | " +
+		// "Energy: " +
+		// song.energy +
+		// "</strong><br>" +
+		// "Genre: " +
+		// song.genre +
+		// " | " +
+		// "Danceability: " +
+		// song.danceability +
+		// "<br>" +
+		// "press to Play</p>";
+
+		if ($(this).hasClass("clicked")) {
+			let clickLabelInputkey =
+				"<p class='song-info'> Artist: " +
+				dotData.artist +
+				"<br>" +
+				"Title: " +
+				dotData.song +
+				"<br>" +
+				"Year: " +
+				dotData.year +
+				"<br>" +
+				"<strong> Valence: " +
+				dotData.valence +
+				" | " +
+				"Energy: " +
+				dotData.energy +
+				"</strong><br>" +
+				"Genre: " +
+				dotData.genre +
+				" | " +
+				"Danceability: " +
+				dotData.danceability +
+				"<br>" +
+				"press to Play</p>";
+
+			clickLabel1.html(clickLabelInputkey);
+			clickLabel1.show();
+		}
+
 		TweenLite.to($(this), 5, {
 			height: dotData.mapH,
 			width: dotData.mapW,

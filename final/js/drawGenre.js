@@ -5,7 +5,8 @@ function drawBarChart() {
 	// damit auch der ausgewählte Dot mittig in der Grafik sitzt
 	// $(".song").removeClass("transform");
 
-	$("#header").text("genre");
+	// $("#header").html("genre <br> <span style="opacity: 0;">t</span>");
+	$("#header").html('genre <br> <span style="opacity: 0;">t</span>');
 	$("#discription").html(
 		"<strong>Are there genres that dominate? </strong>The stacked bar chart below displays the distribution and weighting of different music genres. A genre is a category into which musical pieces can be classified based on their musical characteristics."
 	);
@@ -29,7 +30,22 @@ function drawBarChart() {
 				ease: "swing",
 			});
 
-			clickLabel1.html(clickLabelInput1);
+			let clickLabelInputGenre =
+				"<p class='song-info'>Artist: " +
+				dotData.artist +
+				"<br>" +
+				"Title: " +
+				dotData.song +
+				"<br>" +
+				"Year: " +
+				dotData.year +
+				"<br>" +
+				"<strong>Genre: " +
+				dotData.genre +
+				"</strong><br>" +
+				"press to Play</p>";
+
+			clickLabel1.html(clickLabelInputGenre);
 			clickLabel1.show();
 		} else {
 			TweenLite.to($(this), 5, {
