@@ -213,6 +213,15 @@ function createElements() {
 					// backgroundColor: color,
 				});
 
+				//durchlaufe und suche nach der Klasse transform
+				$(".transform").each(function () {
+					let dotData = $(this).data();
+					$(this).css({
+						left: dotData.barX,
+						top: dotData.barY,
+					});
+				});
+
 				//je nach Ansciht unterschiedliche Informationen im Label
 				if (isShowing === "map") {
 					clickLabelInput1 =
