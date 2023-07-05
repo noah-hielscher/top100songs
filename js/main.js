@@ -1,14 +1,15 @@
+// Globale Variablen
 let stage;
 let stageHeight;
 let stageWidth;
 let groupedByContinent;
 let toggleViewButton = $("#toggleViewButton");
 
-//Menübar
-let info = $("#info");
-let energy = $("#energy");
-let genres = $("#genres");
-let keys = $("#keys");
+// Menüleiste
+let info = $("#info"); // Informationen
+let energy = $("#energy"); // Energie
+let genres = $("#genres"); // Genres
+let keys = $("#keys"); // Tasten
 
 let isShowing;
 
@@ -22,7 +23,7 @@ let clickLabelInput2;
 
 let bar;
 
-//Farbe
+// Farbe der Genres
 const colorGenres = [
 	"#47B5D8",
 	"#8FD87D",
@@ -50,7 +51,7 @@ $(function () {
 	createElements();
 
 	drawStart();
-	//info css clickedMenu
+	// Info CSS geklicktes Menü
 	info.addClass("clickedMenu");
 
 	menubar.hover(menubar());
@@ -68,19 +69,16 @@ function prepareData() {
 
 function createElements() {
 	let indexX = 0;
-	//barMax = newGnere Summer aller Songs
+	// barMax = Summe aller Songs in newGnere
 	let barMax = songs.length;
 
-	// Hilfsvariable: Map
-	const populationMax = gmynd.dataMax(songs, "popularity");
-
-	//Margin
+	// Randabstände
 	let marginTop = 230;
 	let marginLeft = 50;
 	let marginRight = 50;
 	let marginBottom = 150;
 
-	//genres
+	// Genres
 	let dotWidth = 21;
 	let paddingRender = 50;
 	let gapY = dotWidth;
@@ -88,21 +86,20 @@ function createElements() {
 	let barY = marginTop;
 	let maxDotLength = Math.floor((stageWidth - paddingRender * 2) / dotWidth);
 
-	//Dancebility Max
+	// Maximaler Danceability-Wert
 	let danceabilityMax = gmynd.dataMax(songs, "danceability");
-	//valence Max
+	// Maximaler Valence-Wert
 	let valenceMax = gmynd.dataMax(songs, "valence");
-	//energie Max
+	// Maximaler Energie-Wert
 	let energyMax = gmynd.dataMax(songs, "energy");
-	//
 
 	let colorIndex = 0;
 	for (let genreName in newGnere) {
 		let currentGenre = newGnere[genreName];
 
-		//Das jeweilige Genre wird durchgegangen, je nachdem wie lange das Genre.leght ist
+		// Das jeweilige Genre wird durchlaufen, je nach Länge des Genres
 		currentGenre.forEach((song, j) => {
-			/* Virutelles jQuery-Element erstellen und Klasse song hizufügen. */
+			/* Virtuelles jQuery-Element erstellen und Klasse "song" hinzufügen */
 			let dot = $("<div></div>");
 			dot.addClass("song");
 
@@ -146,7 +143,6 @@ function createElements() {
 				song.danceability,
 				0,
 				danceabilityMax,
-				//plsu 100 außnahmsweise, da dancebility zu gering ist vom Wert
 				stageHeight - marginBottom + 100,
 				marginTop
 			);
@@ -158,8 +154,6 @@ function createElements() {
 			dot.attr("genre", song.newGenre);
 
 			dot.css({
-				// 'height': mapD,
-				// 'width': mapD,
 				left: mapX,
 				top: mapY,
 			});
@@ -194,7 +188,6 @@ function createElements() {
 			});
 
 			stage.append(dot);
-
 			clickLabel1 = $("#clickLabel1");
 			clickLabel2 = $("#clickLabel2");
 			resetLabel = $("#resetLabel");
@@ -202,15 +195,11 @@ function createElements() {
 			//Click Label
 			dot.click(() => {
 				$(".song").removeClass("clicked");
-
-				//funktions namnes Transform
-
 				searchQuery = song.artist + " " + song.song;
 
 				//Clicklabel Hintergrundfarbe
 				clickLabel1.css({
 					borderTop: "2px solid " + color,
-					// backgroundColor: color,
 				});
 
 				//durchlaufe und suche nach der Klasse transform
@@ -222,7 +211,7 @@ function createElements() {
 					});
 				});
 
-				//je nach Ansciht unterschiedliche Informationen im Label
+				//je nach Ansicht unterschiedliche Informationen im Label
 				if (isShowing === "map") {
 					clickLabelInput1 =
 						"<p class='song-info'>Artist: " +
@@ -286,9 +275,10 @@ function createElements() {
 							"press to Play</p>";
 					}
 				}
-
+				//Input zum Clicklabel
 				clickLabel1.html(clickLabelInput1);
 
+				//abspielen der Musik nach "Klick" auf YoutTube
 				clickLabel1.click(() => {
 					let searchQuery = 0;
 					let searchUrl = 0;
@@ -314,12 +304,10 @@ function createElements() {
 					//Welche Eigenschaft hat der angeklickte Dot
 					clickedDot = song.newGenre;
 
-					// Durch contitnete durcheterieren
 					$(".song").each(function () {
 						let thisGenre = $(this).data("genre");
 
 						if (thisGenre == clickedDot) {
-							// $(this).addClass("song clicked");
 						} else {
 							$(this).hide();
 						}
@@ -343,8 +331,6 @@ function createElements() {
 						dot.addClass("song clicked transform");
 					}
 				}
-
-				//"song clicked" css bearbeiten
 				clickLabel1.show();
 			});
 
@@ -425,7 +411,7 @@ function createElements() {
 						}
 					}
 					clickLabel2.html(clickLabelInput2);
-				}, 1000); // Ändern Sie die Zeit (in Millisekunden) nach Bedarf
+				}, 1000);
 			});
 
 			dot.mouseup(() => {
@@ -498,9 +484,8 @@ function createElements() {
 				});
 				hoverLabel.show();
 			});
-
+			//Hover out
 			dot.mouseout(() => {
-				/*  Dem gehoverten Element die Klasse "hover" entfernen. */
 				$(".song").removeClass("hovered");
 				$("#hoverLabel").text("");
 			});

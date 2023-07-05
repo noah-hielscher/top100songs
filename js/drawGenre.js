@@ -2,26 +2,23 @@ function drawBarChart() {
 	isShowing = "bar";
 	clearRendere();
 
-	// damit auch der ausgewählte Dot mittig in der Grafik sitzt
-	// $(".song").removeClass("transform");
-
-	// $("#header").html("genre <br> <span style="opacity: 0;">t</span>");
+	// Header und Beschreibung aktualisieren
 	$("#header").html('genre <br> <span style="opacity: 0;">t</span>');
 	$("#discription").html(
 		"<strong>Are there genres that dominate? </strong>The stacked bar chart below displays the distribution and weighting of different music genres. A genre is a category into which musical pieces can be classified based on their musical characteristics."
 	);
 
-	/* Gleich siehe drawMap-Funktion */
-
+	// Jeden Song durchgehen
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
-		// $(".song").removeClass("transform");
+		// Hintergrundfarbe setzen
 		$(this).css({
 			"background-color": dotData.color,
 		});
 
 		if ($(this).hasClass("clicked")) {
+			// Animation für geklickte Songs
 			TweenLite.to($(this), 5, {
 				left: dotData.barX + 6.3,
 				top: dotData.barY + 6.3,
@@ -30,24 +27,26 @@ function drawBarChart() {
 				ease: "swing",
 			});
 
+			// Song-Informationen für Klick-Label
 			let clickLabelInputGenre =
-				"<p class='song-info'>Artist: " +
+				"<p class='song-info'>Künstler: " +
 				dotData.artist +
 				"<br>" +
-				"Title: " +
+				"Titel: " +
 				dotData.song +
 				"<br>" +
-				"Year: " +
+				"Jahr: " +
 				dotData.year +
 				"<br>" +
 				"<strong>Genre: " +
 				dotData.genre +
 				"</strong><br>" +
-				"press to Play</p>";
+				"Zum Abspielen klicken</p>";
 
 			clickLabel1.html(clickLabelInputGenre);
 			clickLabel1.show();
 		} else {
+			// Animation für nicht geklickte Songs
 			TweenLite.to($(this), 5, {
 				left: dotData.barX,
 				top: dotData.barY,

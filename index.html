@@ -3,19 +3,18 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>top 100 songs.</title>
+
+		<!-- Einbinden der JavaScript-Bibliotheken -->
 		<script src="lib/jquery-3.6.0.min.js"></script>
 		<script src="lib/gmynd.js"></script>
-		<script src="lib/chroma.min.js"></script>
+		<script src="lib/CSSPlugin.min.js"></script>
+		<script src="lib/TweenLite.min.js"></script>
+
+		<!-- Einbinden der CSS-Dateien -->
 		<link rel="stylesheet" href="css/typo.css" />
 		<link rel="stylesheet" href="css/overlay.css" />
 		<link rel="stylesheet" href="css/labels.css" />
 		<link rel="stylesheet" href="css/graphic.css" />
-		<link rel="stylesheet" href="css/typo.css" />
-
-		<!-- Liberys von SPeedy -->
-		<script src="LiberySpeedy/CSSPlugin.min.js"></script>
-		<script src="LiberySpeedy/jquery.gsap.min.js"></script>
-		<script src="LiberySpeedy/TweenLite.min.js"></script>
 
 		<style>
 			body {
@@ -25,11 +24,14 @@
 	</head>
 
 	<body>
+		<!-- Renderer & Labels -->
 		<div id="renderer">
 			<div id="clickLabel1"></div>
 			<div id="clickLabel2"></div>
 			<div id="resetLabel"></div>
 		</div>
+
+		<!-- Einführung -->
 		<div class="intro">
 			<div class="centerer">
 				<h2 style="margin: -20px">top 100 songs.</h2>
@@ -59,20 +61,26 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Header -->
 		<div class="header">
 			<div class="centerer">
 				<h2 id="header"></h2>
 				<div id="discription"></div>
 			</div>
 		</div>
+
+		<!-- Menü -->
 		<div id="menu" class="menu">
 			<div id="info" class="menu-item">info</div>
 			<div id="energy" class="menu-item">energy & valence</div>
 			<div id="genres" class="menu-item">genres</div>
 			<div id="keys" class="menu-item">key & dancebility</div>
 		</div>
+
 		<div id="hoverLabel"></div>
 
+		<!-- Einbinden der JavaScript-Dateien -->
 		<script src="data/songs.js"></script>
 		<script src="js/drawGenre.js"></script>
 		<script src="js/drawMap.js"></script>

@@ -1,48 +1,50 @@
 function drawKey() {
 	isShowing = "key";
 	clearRendere();
-	$("#header").html("key & <br> danceability");
 
+	// Header und Beschreibung aktualisieren
+	$("#header").html("key & <br> danceability");
 	$("#discription").html(
 		"<strong>Are there any keys that are particularly danceable?</strong> The graphic displays the distribution of songs based on their key and the intensity of danceability. The key indicates the tonal system in which a song is written. Danceability refers to the suitability of a music track for dancing, including tempo, rhythm stability, beat strength, and overall regularity."
 	);
 
+	// Jeden Song durchgehen
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
-		/* Klasse transform hinzufügen, damit die Animation richtig positioniert ist. */
-		// $(".song").addClass("transform");
-
+		// Hintergrundfarbe setzen
 		$(this).css({
 			"background-color": dotData.color,
 		});
 
 		if ($(this).hasClass("clicked")) {
+			// Song-Informationen für Klick-Label
 			let clickLabelInputkey =
-				"<p class='song-info'>Artist: " +
+				"<p class='song-info'>Künstler: " +
 				dotData.artist +
 				"<br>" +
-				"Title: " +
+				"Titel: " +
 				dotData.song +
 				"<br>" +
-				"Year: " +
+				"Jahr: " +
 				dotData.year +
 				"<br>" +
-				"<strong>Key: " +
+				"<strong>Tonart: " +
 				dotData.key +
 				" | " +
-				"Dancebility: " +
+				"Tanzbarkeit: " +
 				dotData.danceability +
 				"</strong><br>" +
 				"Genre: " +
 				dotData.genre +
 				"<br>" +
-				"press to Play</p>";
+				"Zum Abspielen klicken</p>";
 
 			clickLabel1.html(clickLabelInputkey);
 			clickLabel1.show();
 		}
 
+		// Animation für jeden Song
 		TweenLite.to($(this), 5, {
 			height: 5,
 			width: 5,

@@ -1,54 +1,35 @@
 function drawMap() {
 	isShowing = "map";
 	clearRendere();
-	$("#header").html("valence <br> & energy");
 
+	// Header und Beschreibung aktualisieren
+	$("#header").html("valence <br> & energy");
 	$("#discription").html(
 		"<strong>Do songs with higher valence also have an equal amount of energy?</strong> In this case, the values for valence and energy are represented in a two-dimensional coordinate system. Valence describes the musical positivity of a song, where high values sound positive. Energy is a measure of intensity and activity in a song, where higher values indicate greater intensity."
 	);
 
+	// Jeden Song durchgehen
 	$(".song").each(function () {
 		let dotData = $(this).data();
 
+		// Hintergrundfarbe setzen
 		$(this).css({
 			"background-color": dotData.color,
 		});
 
-		// "<p class='song-info'> Artist: " +
-		// song.artist +
-		// "<br>" +
-		// "Title: " +
-		// song.song +
-		// "<br>" +
-		// "Year: " +
-		// song.year +
-		// "<br>" +
-		// "<strong> Valence: " +
-		// song.valence +
-		// " | " +
-		// "Energy: " +
-		// song.energy +
-		// "</strong><br>" +
-		// "Genre: " +
-		// song.genre +
-		// " | " +
-		// "Danceability: " +
-		// song.danceability +
-		// "<br>" +
-		// "press to Play</p>";
-
 		if ($(this).hasClass("clicked")) {
+			// Song-Informationen für Klick-Label
 			let clickLabelInputkey =
-				"<p class='song-info'> Artist: " +
+				"<p class='song-info'>Künstler: " +
 				dotData.artist +
 				"<br>" +
-				"Title: " +
+				"Titel: " +
 				dotData.song +
 				"<br>" +
-				"Year: " +
+				"Jahr: " +
 				dotData.year +
 				"<br>" +
-				"<strong> Valence: " +
+				"<strong>Valence: " +
 				dotData.valence +
 				" | " +
 				"Energy: " +
@@ -57,15 +38,16 @@ function drawMap() {
 				"Genre: " +
 				dotData.genre +
 				" | " +
-				"Danceability: " +
+				"Tanzbarkeit: " +
 				dotData.danceability +
 				"<br>" +
-				"press to Play</p>";
+				"Zum Abspielen klicken</p>";
 
 			clickLabel1.html(clickLabelInputkey);
 			clickLabel1.show();
 		}
 
+		// Animation für jeden Song
 		TweenLite.to($(this), 5, {
 			height: dotData.mapH,
 			width: dotData.mapW,
